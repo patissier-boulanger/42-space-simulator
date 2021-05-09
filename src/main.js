@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
-import { createStars } from "./models/stars";
+import { createStars } from "./creators/createStars";
 import { useHelpers } from "./helpers/helpers";
 import { loadAllModel } from "./loaders/loaders";
 
@@ -39,11 +39,12 @@ asyncLoader();
  * Test cube
  */
 
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshStandardMaterial(),
+const testPlanet = new THREE.Mesh(
+  new THREE.SphereGeometry(50, 200, 200),
+  new THREE.MeshStandardMaterial({ wireframe: true, color: "red" }),
 );
-scene.add(cube);
+
+scene.add(testPlanet);
 
 /**
  * Sizes
@@ -100,7 +101,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   2000,
 );
-camera.position.z = 3;
+camera.position.set(0, 200, 100);
 scene.add(camera);
 
 // Controls
