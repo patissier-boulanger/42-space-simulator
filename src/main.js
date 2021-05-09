@@ -4,6 +4,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
 import { createStars } from "./models/stars";
+import { useHelpers } from "./helpers/helpers";
+import { loadAllModel } from "./loaders/loaders";
 
 /**
  * Base
@@ -18,22 +20,20 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
-/**
- * Textures
- */
-const textureLoader = new THREE.TextureLoader();
-const starTexture = textureLoader.load("/textures/particles/3.png");
+// helpers
+useHelpers(scene);
 
-const cubeTextureLoader = new THREE.CubeTextureLoader();
-const environmentMap = cubeTextureLoader.load([
-  "/textures/skybox/SkyboxX-.png",
-  "/textures/skybox/SkyboxX+.png",
-  "/textures/skybox/SkyboxY-.png",
-  "/textures/skybox/SkyboxY+.png",
-  "/textures/skybox/SkyboxZ-.png",
-  "/textures/skybox/SkyboxZ+.png",
-]);
-scene.background = environmentMap;
+const asyncLoader = async () => {
+  const [texture, cubeTexture] = await loadAllModel();
+
+  //stars
+  const stars = createStars(texture, 50000);
+  scene.add(stars);
+
+  //skybox
+  scene.background = cubeTexture;
+};
+asyncLoader();
 
 /**
  * Test cube
@@ -44,13 +44,6 @@ const cube = new THREE.Mesh(
   new THREE.MeshBasicMaterial(),
 );
 scene.add(cube);
-
-/**
- * create stars
- */
-
-const stars = createStars(starTexture, 50000);
-scene.add(stars);
 
 /**
  * Sizes
@@ -82,7 +75,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
   0.1,
-  100,
+  2000,
 );
 camera.position.z = 3;
 scene.add(camera);
