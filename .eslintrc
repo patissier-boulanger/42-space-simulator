@@ -8,6 +8,8 @@
   "env": {
     "browser": true
   },
+
+  "ignorePatterns": "/bundler",
   "rules": {
     "prettier/prettier": "error"
   }

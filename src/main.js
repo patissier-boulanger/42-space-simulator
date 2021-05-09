@@ -3,9 +3,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
+import { createStars } from "./models/stars";
+
 /**
  * Base
  */
+
 // Debug
 const gui = new dat.GUI();
 
@@ -19,6 +22,8 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const starTexture = textureLoader.load("/textures/particles/3.png");
+
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 const environmentMap = cubeTextureLoader.load([
   "/textures/skybox/SkyboxX-.png",
@@ -39,6 +44,13 @@ const cube = new THREE.Mesh(
   new THREE.MeshBasicMaterial(),
 );
 scene.add(cube);
+
+/**
+ * create stars
+ */
+
+const stars = createStars(starTexture, 50000);
+scene.add(stars);
 
 /**
  * Sizes
