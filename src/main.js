@@ -41,7 +41,7 @@ asyncLoader();
 
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial(),
+  new THREE.MeshStandardMaterial(),
 );
 scene.add(cube);
 
@@ -52,6 +52,29 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
+
+/**
+ * Lights
+ */
+
+const ambientLight = new THREE.AmbientLight("white", 0.12);
+gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+scene.add(ambientLight);
+
+const sunLight = new THREE.PointLight("orange", 0, 700);
+gui.add(sunLight, "intensity").min(0).max(1000).step(0.001);
+
+sunLight.position.set(0, 5, 0);
+scene.add(sunLight);
+
+const sphereSize = 2;
+const pointLightHelper = new THREE.PointLightHelper(sunLight, sphereSize);
+
+scene.add(pointLightHelper);
+
+// const light = new THREE.AmbientLight("green", 1000, 100);
+// light.position.set(50, 50, 50);
+// scene.add(light);
 
 window.addEventListener("resize", () => {
   // Update sizes
