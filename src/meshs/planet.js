@@ -1,44 +1,56 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
 
-const createCustomPlanet = ({
-  scene,
-  x,
-  y,
-  z,
-  radius,
-  axisFromParent,
-  widthSegment,
-  heightSegment,
-}) => {
-  const planetGeometry = new THREE.SphereGeometry(
-    radius,
-    widthSegment,
-    heightSegment,
-  );
-  const planetMaterial = new THREE.MeshStandardMaterial({
-    color: "red",
-  });
+const createPlanet = (scene, model, distanceFromAxis) => {
+  return {
+    scene,
+    model: model.scene,
+    distanceFromAxis,
 
-  const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+    setShadow() {
+      this.model.castShadow = true;
+      this.model.receiveShadow = true;
+    },
 
-  planet.position.set(x, y, z);
-  scene.add(planet);
+    setOutLine(outLineMaterial, outLineWidth) {
+      const cloneModel = this.model.clone();
+      cloneModel.traverse((child) => {
+        if (child.isMesh) child.material = outLineMaterial;
+      });
+      cloneModel.scale.multiplyScalar(outLineWidth);
+      this.scene.add(cloneModel);
+    },
 
-  return planet;
+    setScale(scale) {
+      this.model.scale.set(scale, scale, scale);
+    },
+
+    setPosition(x, y, z, distanceFromAxis) {
+      this.model.position.set(x + distanceFromAxis, y, z);
+    },
+
+    setOrbit(radius, thickness, segments, color, xAxis) {
+      const orbitGeometry = new THREE.TorusGeometry(
+        radius,
+        thickness,
+        segments,
+        segments,
+      );
+      const orbitMaterial = new THREE.MeshStandardMaterial({
+        color,
+        side: THREE.DoubleSide,
+      });
+      const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+      orbit.castShadow = true;
+      orbit.receiveShadow = true;
+      orbit.rotation.x = xAxis;
+      this.scene.add(orbit);
+    },
+
+    realize() {
+      this.scene.add(this.model);
+    },
+  };
 };
 
-const addPlanetModel = (scene, model, position, scale, distanceFromAxis) => {
-  const { x, y, z } = position;
-  const planetModel = model.scene;
-
-  planetModel.scale.set(scale, scale, scale);
-  planetModel.position.set(x + distanceFromAxis, y, z);
-  planetModel.castShadow = true;
-  planetModel.receiveShadow = true;
-
-  scene.add(planetModel);
-  return planetModel;
-};
-
-export { createCustomPlanet, addPlanetModel };
+export { createPlanet };
