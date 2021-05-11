@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
 
-const createPlanet = ({
+const createCustomPlanet = ({
   scene,
   x,
   y,
@@ -28,4 +28,17 @@ const createPlanet = ({
   return planet;
 };
 
-export { createPlanet };
+const addPlanetModel = (scene, model, position, scale, distanceFromAxis) => {
+  const { x, y, z } = position;
+  const planetModel = model.scene;
+
+  planetModel.scale.set(scale, scale, scale);
+  planetModel.position.set(x + distanceFromAxis, y, z);
+  planetModel.castShadow = true;
+  planetModel.receiveShadow = true;
+
+  scene.add(planetModel);
+  return planetModel;
+};
+
+export { createCustomPlanet, addPlanetModel };

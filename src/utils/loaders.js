@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const loadingManager = new THREE.LoadingManager();
-
 loadingManager.onLoad = function () {
   console.log("Loading complete!");
 };
@@ -16,7 +15,6 @@ loadingManager.onError = function (url) {
 };
 
 const gltfLoader = new GLTFLoader();
-const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager);
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const _loadModel = (url, loader) => {
@@ -25,27 +23,16 @@ const _loadModel = (url, loader) => {
   });
 };
 
-// const loadGltf = () => {};
-
 const _promisyfyModels = () => {
   const loadStarTexture = _loadModel("/textures/stars/1.png", textureLoader);
-  const loadSkyboxTexture = _loadModel(
-    [
-      "/textures/skybox/SkyboxX-.png",
-      "/textures/skybox/SkyboxX+.png",
-      "/textures/skybox/SkyboxY-.png",
-      "/textures/skybox/SkyboxY+.png",
-      "/textures/skybox/SkyboxZ-.png",
-      "/textures/skybox/SkyboxZ+.png",
-    ],
-    cubeTextureLoader,
-  );
-  const loadAstronautModel = _loadModel(
-    "/textures/astronaut/scene.gltf",
-    gltfLoader,
+
+  const loadPolymapTexture = _loadModel(
+    "/textures/skybox/panorama.png",
+    textureLoader,
   );
 
   const gltfUrls = [
+    "/textures/astronaut/scene.gltf",
     "/textures/planets/sun.gltf",
     "/textures/planets/earth.gltf",
     "/textures/planets/saturn.gltf",
@@ -62,12 +49,7 @@ const _promisyfyModels = () => {
     return _loadModel(url, gltfLoader);
   });
 
-  return [
-    loadStarTexture,
-    loadSkyboxTexture,
-    loadAstronautModel,
-    ...gltfPromises,
-  ];
+  return [loadStarTexture, loadPolymapTexture, ...gltfPromises];
 };
 
 const loadAllModel = async () => {
