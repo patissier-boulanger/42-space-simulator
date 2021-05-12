@@ -51,6 +51,7 @@ const _promisyfyModels = () => {
     "/textures/planets/mars.gltf",
     "/textures/planets/venus.gltf",
     "/textures/objects/spaceShip/cuteSpaceship.gltf",
+    "/textures/objects/cloud/cloud.gltf",
   ];
 
   const gltfPromises = gltfUrls.map((url) => {

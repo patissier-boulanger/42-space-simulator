@@ -43,13 +43,38 @@ const main = async () => {
     marsModel,
     venusModel,
     spaceShipModel,
+    cloudModel,
     whaleModel,
   ] = await loadAllModel();
 
+  const cloudGroup = new THREE.Group();
+
+  const cloud = cloudModel.scene.children[0].clone();
+  cloud.receiveShadow = true;
+  cloud.castShadow = true;
+  cloud.scale.set(2, 2, 2);
+  cloud.position.set(0, 0, 0);
+
+  cloudGroup.add(cloud);
+
+  const cloud2 = cloudModel.scene.children[0].clone();
+  console.log(cloud2);
+  cloud2.receiveShadow = true;
+  cloud2.castShadow = true;
+  cloud2.scale.set(5, 5, 5);
+  cloud2.position.set(0, 1000, 0);
+
+  cloudGroup.add(cloud2);
+
+  scene.add(cloudGroup);
+
   console.log(spaceShipModel);
   const spaceShip = spaceShipModel.scene;
-  spaceShip.scale.set(1000, 1000, 1000);
-  spaceShip.position.set(0, 0, 0);
+  spaceShip.receiveShadow = true;
+  spaceShip.castShadow = true;
+  spaceShip.scale.set(200, 200, 200);
+  spaceShip.position.set(18000, 3000, 0);
+  spaceShip.rotation.x = -Math.PI / 2;
   scene.add(spaceShip);
 
   const sun = createPlanet(scene, sunModel);
@@ -69,63 +94,63 @@ const main = async () => {
   const venus = createPlanet(scene, venusModel);
   venus.realize();
   venus.setShadow();
-  venus.setScale(80000);
+  venus.setScale(100000);
   venus.setOutLine(outlineMaterial1, 1.01);
   venus.setOrbit(13000, 5, 300, "indianred", Math.PI / 2);
 
   const earth = createPlanet(scene, earthModel);
   earth.realize();
   earth.setShadow();
-  earth.setScale(80000);
+  earth.setScale(100000);
   earth.setOutLine(outlineMaterial1, 1.01);
   earth.setOrbit(16000, 5, 300, "indianred", Math.PI / 2);
 
   const mars = createPlanet(scene, marsModel);
   mars.realize();
   mars.setShadow();
-  mars.setScale(80000);
+  mars.setScale(100000);
   mars.setOutLine(outlineMaterial1, 1.01);
   mars.setOrbit(25000, 15, 300, "indianred", Math.PI / 2);
 
   const jupiter = createPlanet(scene, jupiterModel);
   jupiter.realize();
   jupiter.setShadow();
-  jupiter.setScale(40000);
+  jupiter.setScale(80000);
   jupiter.setOutLine(outlineMaterial1, 1.01);
   jupiter.setOrbit(30000, 15, 300, "indianred", Math.PI / 2);
 
   const saturn = createPlanet(scene, saturnModel);
   saturn.realize();
   saturn.setShadow();
-  saturn.setScale(50000);
+  saturn.setScale(80000);
   saturn.setOutLine(outlineMaterial1, 1.01);
   saturn.setOrbit(35000, 15, 300, "indianred", Math.PI / 2);
 
   const uranus = createPlanet(scene, uranusModel);
   uranus.realize();
   uranus.setShadow();
-  uranus.setScale(50000);
+  uranus.setScale(80000);
   uranus.setOutLine(outlineMaterial1, 1.01);
   uranus.setOrbit(50000, 15, 300, "indianred", Math.PI / 2);
 
   const neptune = createPlanet(scene, neptuneModel);
   neptune.realize();
   neptune.setShadow();
-  neptune.setScale(50000);
+  neptune.setScale(80000);
   neptune.setOutLine(outlineMaterial1, 1.01);
   neptune.setOrbit(60000, 15, 300, "indianred", Math.PI / 2);
 
   const pluto = createPlanet(scene, plutoModel);
   pluto.realize();
   pluto.setShadow();
-  pluto.setScale(90000);
+  pluto.setScale(100000);
   pluto.setOutLine(outlineMaterial1, 1.01);
   pluto.setOrbit(65000, 10, 300, "indianred", Math.PI / 2 - 50);
 
   createStars({
     scene,
     texture: starTexture,
-    count: 50000,
+    count: 40000,
     diffusionRate: 400000,
     size: 200,
   });
@@ -212,6 +237,22 @@ const main = async () => {
   const floating = mixer.clipAction(whale.animations[0]);
   floating.play();
 
+  let counter = 0;
+  function moveModelAlongPath() {
+    if (counter <= 1) {
+      const axis = new THREE.Vector3();
+      const up = new THREE.Vector3(0, 0, 0);
+
+      cloudGroup.position.copy(curve.getPointAt(counter));
+      const tangent = curve.getTangentAt(counter).normalize();
+      axis.crossVectors(up, tangent).normalize();
+      var radians = Math.acos(up.dot(tangent));
+      cloudGroup.quaternion.setFromAxisAngle(axis, radians);
+      counter += 0.00005;
+    } else {
+      counter = 0;
+    }
+  }
   /**
    * test
    */
@@ -299,6 +340,9 @@ const main = async () => {
     }
 
     whale.rotation.y += 0.0001;
+    spaceShip.rotation.z += 0.005;
+
+    moveModelAlongPath();
 
     sun.rotate(0.0001);
 
