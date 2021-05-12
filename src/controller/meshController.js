@@ -5,4 +5,6 @@ const moveMesh = (mesh, time) => {
   mesh.position.z = Math.sin(time / 10) * 2000;
 };
 
+const rotatePlanet = () => {};
+
 export { moveMesh };

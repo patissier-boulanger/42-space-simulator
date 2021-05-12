@@ -6,8 +6,6 @@ import * as dat from "dat.gui";
 import { createStars } from "./meshs/stars";
 import { createPlanet } from "./meshs/planet";
 
-import { moveMesh } from "./controller/meshController";
-
 import { useHelpers } from "./utils/helpers";
 import { loadAllModel } from "./utils/loaders";
 
@@ -17,6 +15,16 @@ const scene = new THREE.Scene();
 const main = async () => {
   useHelpers(scene);
   const gui = new dat.GUI();
+
+  const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+
+  const outlineMaterial1 = new THREE.MeshToonMaterial({
+    color: "white",
+    side: THREE.BackSide,
+  });
 
   //async load
   const [
@@ -35,16 +43,6 @@ const main = async () => {
     venusModel,
   ] = await loadAllModel();
 
-  const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight,
-  };
-
-  const outlineMaterial1 = new THREE.MeshToonMaterial({
-    color: "white",
-    side: THREE.BackSide,
-  });
-
   const sun = createPlanet(scene, sunModel);
   sun.setShadow();
   sun.setScale(15000);
@@ -55,7 +53,7 @@ const main = async () => {
   const mercury = createPlanet(scene, mecuryModel);
   mercury.setShadow();
   mercury.setScale(30000);
-  mercury.setPosition(0, 0, 0, 10000);
+  // mercury.setPosition(Math.cos(99) * 10000, 0, Math.sin(99) * 10000, 0);
   mercury.setOutLine(outlineMaterial1, 1.01);
   mercury.setOrbit(10000, 5, 300, "indianred", Math.PI / 2 - 0.15);
   mercury.realize();
@@ -63,7 +61,7 @@ const main = async () => {
   const venus = createPlanet(scene, venusModel);
   venus.setShadow();
   venus.setScale(30000);
-  venus.setPosition(0, 0, 0, 13000);
+  // venus.setPosition(0, 0, 0, 13000);
   venus.setOutLine(outlineMaterial1, 1.01);
   venus.setOrbit(13000, 5, 300, "indianred", Math.PI / 2);
   venus.realize();
@@ -131,21 +129,6 @@ const main = async () => {
     diffusionRate: 400000,
     size: 200,
   });
-
-  // /**
-  //  * Test cube
-  //  */
-  // const rotatePlanetParameter = {
-  //   scene,
-  //   x: 100,
-  //   y: 0,
-  //   z: 0,
-  //   radius: 100,
-  //   axisFromParent: 0,
-  //   widthSegment: 200,
-  //   heightSegment: 200,
-  // };
-  // const rotatePlanet = createCustomPlanet(rotatePlanetParameter);
 
   /**
    * Lights
@@ -222,8 +205,15 @@ const main = async () => {
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
 
-    //move planet
-    // moveMesh(rotatePlanet, elapsedTime);
+    mercury.revolve(1300, elapsedTime / 5 + 53, 10000);
+    venus.revolve(0, elapsedTime / 7 + 32, 13000);
+    earth.revolve(0, elapsedTime / 7 + 23, 16000);
+    // mars.revolve(0, elapsedTime / 7, 25000);
+    // jupiter.revolve(0, elapsedTime / 9, 30000);
+    // saturn.revolve(0, elapsedTime / 10, 35000);
+    // uranus.revolve(0, elapsedTime / 13, 50000);
+    // neptune.revolve(0, elapsedTime / 15, 60000);
+    // pluto.revolve(0, elapsedTime / 7, 65000);
 
     // Update controls
     controls.update();

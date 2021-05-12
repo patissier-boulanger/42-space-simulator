@@ -1,11 +1,25 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
 
-const createPlanet = (scene, model, distanceFromAxis) => {
+const createPlanet = (
+  scene,
+  model,
+  scale,
+  startPosition,
+  outlineBaseModel,
+  distanceFromAxis,
+  rotationHeight,
+  rotationSpeed,
+) => {
   return {
     scene,
     model: model.scene,
+    scale,
+    startPosition,
+    outlineBaseModel,
     distanceFromAxis,
+    rotationHeight,
+    rotationSpeed,
 
     setShadow() {
       this.model.castShadow = true;
@@ -18,6 +32,7 @@ const createPlanet = (scene, model, distanceFromAxis) => {
         if (child.isMesh) child.material = outLineMaterial;
       });
       cloneModel.scale.multiplyScalar(outLineWidth);
+      this.outlineBaseModel = cloneModel;
       this.scene.add(cloneModel);
     },
 
@@ -45,6 +60,19 @@ const createPlanet = (scene, model, distanceFromAxis) => {
       orbit.receiveShadow = true;
       orbit.rotation.x = xAxis;
       this.scene.add(orbit);
+    },
+
+    revolve(rotationHeight, rotationSpeed, distanceFromAxis) {
+      this.model.position.set(
+        Math.cos(rotationSpeed) * distanceFromAxis,
+        Math.sin(rotationSpeed) * rotationHeight,
+        Math.sin(rotationSpeed) * distanceFromAxis,
+      );
+      this.outlineBaseModel.position.set(
+        Math.cos(rotationSpeed) * distanceFromAxis,
+        Math.sin(rotationSpeed) * rotationHeight,
+        Math.sin(rotationSpeed) * distanceFromAxis,
+      );
     },
 
     realize() {
