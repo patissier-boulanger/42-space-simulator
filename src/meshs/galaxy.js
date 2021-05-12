@@ -1,17 +1,5 @@
 import * as THREE from "three";
 
-const parameters = {
-  count: 1000,
-  size: 0.02,
-  radius: 5,
-  branches: 3,
-  spin: 1,
-  randomness: 0.2,
-  randomnessPower: 3,
-  insideColor: "#ff6030",
-  ousideColor: "#ff6030",
-};
-
 const createGalaxy = (
   scene,
   count,
@@ -80,7 +68,7 @@ const createGalaxy = (
           Math.sin(branchAngle + spinAngle) * radius + randomZ; // z
 
         const mixedColor = colorInside.clone();
-        mixedColor.lerp(colorOutside, radius / parameters.radius);
+        mixedColor.lerp(colorOutside, radius / 5); //this.radius
 
         colors[i3] = mixedColor.r;
         colors[i3 + 1] = mixedColor.g;

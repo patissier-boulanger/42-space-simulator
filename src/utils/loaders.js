@@ -18,6 +18,7 @@ loadingManager.onError = function (url) {
 const gltfLoader = new GLTFLoader();
 const fbxLoader = new FBXLoader();
 const textureLoader = new THREE.TextureLoader(loadingManager);
+const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager);
 
 const _loadModel = (url, loader) => {
   return new Promise((resolve) => {
@@ -36,6 +37,18 @@ const _promisyfyModels = () => {
   const loadFbxTexture = _loadModel(
     "/textures/objects/whale/whale.fbx",
     fbxLoader,
+  );
+
+  const loadcubeTexture = _loadModel(
+    [
+      "/textures/skybox/SkyboxX-.png",
+      "/textures/skybox/SkyboxX+.png",
+      "/textures/skybox/SkyboxY-.png",
+      "/textures/skybox/SkyboxY+.png",
+      "/textures/skybox/SkyboxZ-.png",
+      "/textures/skybox/SkyboxZ+.png",
+    ],
+    cubeTextureLoader,
   );
 
   const gltfUrls = [
@@ -58,7 +71,13 @@ const _promisyfyModels = () => {
     return _loadModel(url, gltfLoader);
   });
 
-  return [loadStarTexture, loadPolymapTexture, ...gltfPromises, loadFbxTexture];
+  return [
+    loadStarTexture,
+    loadPolymapTexture,
+    loadFbxTexture,
+    loadcubeTexture,
+    ...gltfPromises,
+  ];
 };
 
 const loadAllModel = async () => {

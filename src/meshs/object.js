@@ -1,75 +1,34 @@
 import * as THREE from "three";
 
-const createObject = (scene, model, startPosition, outlineBaseModel) => {
+const createObject = (scene, model, animationMixer = null) => {
   return {
     scene,
-    model: model.scene,
-    startPosition,
-    outlineBaseModel,
+    model,
+    animationMixer,
 
     setShadow() {
       this.model.castShadow = true;
       this.model.receiveShadow = true;
     },
 
-    setOutLine(outLineMaterial, outLineWidth) {
-      const cloneModel = this.model.clone();
-      cloneModel.traverse((child) => {
-        if (child.isMesh) child.material = outLineMaterial;
-      });
-      cloneModel.scale.multiplyScalar(outLineWidth);
-      this.outlineBaseModel = cloneModel;
-      this.scene.add(cloneModel);
-    },
-
     setScale(scale) {
       this.model.scale.set(scale, scale, scale);
     },
 
-    setPosition(x, y, z, distanceFromAxis) {
-      this.model.position.set(x + distanceFromAxis, y, z);
+    setPosition(x, y, z) {
+      this.model.position.set(x, y, z);
     },
 
-    setOrbit(radius, thickness, segments, color, xAxis) {
-      const orbitGeometry = new THREE.TorusGeometry(
-        radius,
-        thickness,
-        segments,
-        segments,
-      );
-      const orbitMaterial = new THREE.MeshStandardMaterial({
-        color,
-        side: THREE.DoubleSide,
-      });
-      const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
-      orbit.castShadow = true;
-      orbit.receiveShadow = true;
-      orbit.rotation.x = xAxis;
-      this.scene.add(orbit);
+    rotate(rotateSpeedRate, rotateAxis) {
+      this.model.rotation[rotateAxis] += rotateSpeedRate;
     },
 
-    revolve(
-      timer,
-      rotationSpeedRate,
-      startPosition,
-      distanceFromAxis,
-      rotationHeight,
-    ) {
-      this.model.position.set(
-        Math.cos(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
-        Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
-        Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
+    animate(animationNumber) {
+      this.animationMixer = new THREE.AnimationMixer(this.model);
+      const animation = this.animationMixer.clipAction(
+        this.model.animations[animationNumber],
       );
-      this.outlineBaseModel.position.set(
-        Math.cos(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
-        Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
-        Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
-      );
-    },
-
-    rotate(rotateSpeedRate) {
-      this.model.rotation.y += rotateSpeedRate;
-      this.outlineBaseModel.rotation.y += rotateSpeedRate;
+      animation.play();
     },
 
     realize() {
