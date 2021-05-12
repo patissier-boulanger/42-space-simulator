@@ -42,7 +42,15 @@ const main = async () => {
     plutoModel,
     marsModel,
     venusModel,
+    spaceShipModel,
+    whaleModel,
   ] = await loadAllModel();
+
+  console.log(spaceShipModel);
+  const spaceShip = spaceShipModel.scene;
+  spaceShip.scale.set(1000, 1000, 1000);
+  spaceShip.position.set(0, 0, 0);
+  scene.add(spaceShip);
 
   const sun = createPlanet(scene, sunModel);
   sun.setShadow();
@@ -124,10 +132,10 @@ const main = async () => {
 
   const galaxy = createGalaxy(
     scene,
-    300,
+    600,
     50,
     15,
-    3,
+    6,
     0.18,
     0.2,
     3,
@@ -141,37 +149,72 @@ const main = async () => {
 
   const galaxy2 = createGalaxy(
     scene,
-    2500,
-    60,
-    55,
+    4000,
+    40,
+    150,
     5,
     0.2,
     0.2,
     3,
     "indianred",
-    "#ff6030",
+    "indianred",
   );
   galaxy2.realize();
-  galaxy2.setPosition(-500000, 0, -10000);
+  galaxy2.setPosition(-5000000, 0, -20000);
   galaxy2.setScale(3000, 3000, 3000);
   galaxy2.setRotation(Math.PI / 2.5, 0, Math.PI / 2.5);
 
+  const galaxy3 = createGalaxy(
+    scene,
+    5000,
+    160,
+    15,
+    13,
+    1.2,
+    0.2,
+    1,
+    "#f79320",
+    "#85301b",
+  );
+  galaxy3.realize();
+  galaxy3.setPosition(300000, -400000, -30000);
+  galaxy3.setScale(3000, 3000, 3000);
+  galaxy3.setRotation(Math.PI / 3, 0, Math.PI / 3);
+
+  /**
+   * test
+   */
+
   const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-10, 0, 10),
-    new THREE.Vector3(-5, 5, 5),
-    new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(5, -5, 5),
-    new THREE.Vector3(-10, 0, 10),
+    new THREE.Vector3(-50000, 10000, -50000),
+    new THREE.Vector3(50000, 10000, 50000),
+    new THREE.Vector3(-50000, 10000, -50000),
   ]);
 
-  const points = curve.getPoints(50);
-  console.log(points[1]);
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-  // Create the final object to add to the scene
-  const curveObject = new THREE.Line(geometry, material);
-  curveObject.scale.set(10000, 10000, 10000);
-  scene.add(curveObject);
+  const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+  const boxMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const cube = new THREE.Mesh(boxGeometry, boxMaterial);
+  cube.position.set(80000, 0, 0);
+  cube.scale.set(800, 800, 800);
+  scene.add(cube);
+
+  let mixer = null;
+
+  const whale = whaleModel;
+  whale.scale.set(1000, 1000, 1000);
+  whale.position.set(10000, 1200000, 0);
+  console.log(whale);
+  whale.castShadow = true;
+  whale.receiveShadow = true;
+  scene.add(whale);
+
+  mixer = new THREE.AnimationMixer(whale);
+  const floating = mixer.clipAction(whale.animations[0]);
+  floating.play();
+
+  /**
+   * test
+   */
 
   /**
    * Lights
@@ -213,7 +256,7 @@ const main = async () => {
     75,
     sizes.width / sizes.height,
     100,
-    20000000000,
+    200000000000,
   );
   camera.position.set(0, 200, 10000);
   scene.add(camera);
@@ -244,9 +287,18 @@ const main = async () => {
    * Animate
    */
   const clock = new THREE.Clock();
+  let previousTime = 0;
 
   const tick = () => {
     const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
+
+    if (mixer) {
+      mixer.update(deltaTime / 10);
+    }
+
+    whale.rotation.y += 0.0001;
 
     sun.rotate(0.0001);
 

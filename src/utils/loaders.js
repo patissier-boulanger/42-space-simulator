@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 const loadingManager = new THREE.LoadingManager();
 loadingManager.onLoad = function () {
@@ -15,6 +16,7 @@ loadingManager.onError = function (url) {
 };
 
 const gltfLoader = new GLTFLoader();
+const fbxLoader = new FBXLoader();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const _loadModel = (url, loader) => {
@@ -31,6 +33,11 @@ const _promisyfyModels = () => {
     textureLoader,
   );
 
+  const loadFbxTexture = _loadModel(
+    "/textures/objects/whale/whale.fbx",
+    fbxLoader,
+  );
+
   const gltfUrls = [
     "/textures/astronaut/scene.gltf",
     "/textures/planets/sun.gltf",
@@ -43,13 +50,14 @@ const _promisyfyModels = () => {
     "/textures/planets/pluto.gltf",
     "/textures/planets/mars.gltf",
     "/textures/planets/venus.gltf",
+    "/textures/objects/spaceShip/cuteSpaceship.gltf",
   ];
 
   const gltfPromises = gltfUrls.map((url) => {
     return _loadModel(url, gltfLoader);
   });
 
-  return [loadStarTexture, loadPolymapTexture, ...gltfPromises];
+  return [loadStarTexture, loadPolymapTexture, ...gltfPromises, loadFbxTexture];
 };
 
 const loadAllModel = async () => {
