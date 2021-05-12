@@ -1,25 +1,11 @@
 import * as THREE from "three";
-import * as dat from "dat.gui";
 
-const createPlanet = (
-  scene,
-  model,
-  scale,
-  startPosition,
-  outlineBaseModel,
-  distanceFromAxis,
-  rotationHeight,
-  rotationSpeed,
-) => {
+const createPlanet = (scene, model, startPosition, outlineBaseModel) => {
   return {
     scene,
     model: model.scene,
-    scale,
     startPosition,
     outlineBaseModel,
-    distanceFromAxis,
-    rotationHeight,
-    rotationSpeed,
 
     setShadow() {
       this.model.castShadow = true;
@@ -62,17 +48,28 @@ const createPlanet = (
       this.scene.add(orbit);
     },
 
-    revolve(rotationHeight, rotationSpeed, distanceFromAxis) {
+    revolve(
+      timer,
+      rotationSpeedRate,
+      startPosition,
+      distanceFromAxis,
+      rotationHeight,
+    ) {
       this.model.position.set(
-        Math.cos(rotationSpeed) * distanceFromAxis,
-        Math.sin(rotationSpeed) * rotationHeight,
-        Math.sin(rotationSpeed) * distanceFromAxis,
+        Math.cos(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
+        Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
+        Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
       );
       this.outlineBaseModel.position.set(
-        Math.cos(rotationSpeed) * distanceFromAxis,
-        Math.sin(rotationSpeed) * rotationHeight,
-        Math.sin(rotationSpeed) * distanceFromAxis,
+        Math.cos(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
+        Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
+        Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
       );
+    },
+
+    rotate(rotateSpeedRate) {
+      this.model.rotation.y += rotateSpeedRate;
+      this.outlineBaseModel.rotation.y += rotateSpeedRate;
     },
 
     realize() {
