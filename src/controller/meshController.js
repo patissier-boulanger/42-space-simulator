@@ -1,10 +1,23 @@
 import * as THREE from "three";
 
-const moveMesh = (mesh, time) => {
-  mesh.position.x = Math.cos(time / 10) * 2000;
-  mesh.position.z = Math.sin(time / 10) * 2000;
+let counter = 0;
+
+const moveGroupAlongPath = (model, verticeArray, moveSpeedRate) => {
+  const curve = new THREE.CatmullRomCurve3(verticeArray);
+
+  if (counter <= 1) {
+    const axis = new THREE.Vector3();
+    const up = new THREE.Vector3(0, 0, 0);
+
+    model.position.copy(curve.getPointAt(counter));
+    const tangent = curve.getTangentAt(counter).normalize();
+    axis.crossVectors(up, tangent).normalize();
+    var radians = Math.acos(up.dot(tangent));
+    model.quaternion.setFromAxisAngle(axis, radians);
+    counter += moveSpeedRate;
+  } else {
+    counter = 0;
+  }
 };
 
-const rotatePlanet = () => {};
-
-export { moveMesh };
+export { moveGroupAlongPath };

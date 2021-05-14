@@ -27,7 +27,7 @@ const _loadModel = (url, loader) => {
 };
 
 const _promisyfyModels = () => {
-  const loadStarTexture = _loadModel("/textures/stars/1.png", textureLoader);
+  const loadStarTexture = _loadModel("/textures/stars/star.png", textureLoader);
 
   const loadPolymapTexture = _loadModel(
     "/textures/skybox/panorama.png",
@@ -52,7 +52,6 @@ const _promisyfyModels = () => {
   );
 
   const gltfUrls = [
-    "/textures/astronaut/scene.gltf",
     "/textures/planets/sun.gltf",
     "/textures/planets/earth.gltf",
     "/textures/planets/saturn.gltf",
@@ -65,6 +64,7 @@ const _promisyfyModels = () => {
     "/textures/planets/venus.gltf",
     "/textures/objects/spaceShip/cuteSpaceship.gltf",
     "/textures/objects/cloud/cloud.gltf",
+    "/textures/astronaut/scene.gltf",
   ];
 
   const gltfPromises = gltfUrls.map((url) => {

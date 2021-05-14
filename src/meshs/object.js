@@ -1,6 +1,8 @@
 import * as THREE from "three";
 
 const createObject = (scene, model, animationMixer = null) => {
+  let counter = 0;
+
   return {
     scene,
     model,
@@ -29,6 +31,24 @@ const createObject = (scene, model, animationMixer = null) => {
         this.model.animations[animationNumber],
       );
       animation.play();
+    },
+
+    moveAlongPath(verticeArray) {
+      const path = new THREE.CatmullRomCurve3(verticeArray);
+
+      if (counter <= 1) {
+        const axis = new THREE.Vector3();
+        const up = new THREE.Vector3(0, 0, 0);
+
+        this.model.position.copy(path.getPointAt(counter));
+        const tangent = path.getTangentAt(counter).normalize();
+        axis.crossVectors(up, tangent).normalize();
+        var radians = Math.acos(up.dot(tangent));
+        this.model.quaternion.setFromAxisAngle(axis, radians);
+        counter += 0.00005;
+      } else {
+        counter = 0;
+      }
     },
 
     realize() {
