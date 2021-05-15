@@ -47,20 +47,16 @@ const main = async () => {
     whaleModel,
     cubeMapModel,
     sunModel,
+    mecuryModel,
+    venusModel,
     earthModel,
-    saturnModel,
+    marsModel,
     jupiterModel,
+    saturnModel,
     uranusModel,
     neptuneModel,
-    mecuryModel,
     plutoModel,
-    marsModel,
-    venusModel,
-    spaceShipModel,
     cloudModel,
-    astronautModel,
-    sun2Model,
-    jupiter2Model,
     leftGloveModel,
     rightGloveModel,
   ] = await loadAllModel();
@@ -69,142 +65,126 @@ const main = async () => {
    * Solar System plantes
    */
 
-  // const sun = createPlanet(scene, sunModel);
-  // sun.setShadow();
-  // sun.setScale(250000);
-  // sun.setPosition(0, 0, 0, 0);
-  // sun.setOutLine(orbitMaterial, 1.01);
-  // sun.realize();
-
-  const sun = createPlanet(scene, sun2Model);
+  const sun = createPlanet(scene, sunModel);
   sun.setShadow();
-  sun.setScale(5000);
-  // sun.model.scale.multiplyScalar(500);
+  sun.setScale(5000 + 30000);
   sun.setPosition(0, 0, 0, 0);
   sun.setOutLine(orbitMaterial, 1.01);
   sun.realize();
 
-  // const mercury = createPlanet(scene, mecuryModel);
-  // mercury.realize();
-  // mercury.setShadow();
-  // mercury.setScale(60000);
-  // mercury.setOutLine(orbitMaterial, 1.01);
-  // mercury.setOrbit(20, 5, 300, "indianred", Math.PI / 2 - 0.15);
+  const mercury = createPlanet(scene, mecuryModel);
+  mercury.realize();
+  mercury.setShadow();
+  mercury.setPosition(0, 0, 0, 0);
+  mercury.setScale(5000 + 60000);
+  mercury.setOrbit(30000, 3, 300, "indianred", Math.PI / 2 - 0.15);
 
-  // const venus = createPlanet(scene, venusModel);
-  // venus.realize();
-  // venus.setShadow();
-  // venus.setScale(100);
-  // venus.setOutLine(orbitMaterial, 1.01);
-  // venus.setOrbit(26, 5, 300, "indianred", Math.PI / 2);
+  const venus = createPlanet(scene, venusModel);
+  venus.realize();
+  venus.setShadow();
+  venus.setScale(5000 + 60000);
+  venus.setOrbit(36000, 5, 300, "indianred", Math.PI / 2);
 
-  // const earth = createPlanet(scene, earthModel);
-  // earth.realize();
-  // earth.setShadow();
-  // earth.setScale(100);
-  // earth.setOutLine(orbitMaterial, 1.01);
-  // earth.setOrbit(380, 50, 300, "indianred", Math.PI / 2);
+  const earth = createPlanet(scene, earthModel);
+  earth.realize();
+  earth.setShadow();
+  earth.setScale(5000 + 80000);
+  earth.setOrbit(42000, 5, 300, "indianred", Math.PI / 2);
 
-  // const mars = createPlanet(scene, marsModel);
-  // mars.realize();
-  // mars.setShadow();
-  // mars.setScale(100);
-  // mars.setOutLine(orbitMaterial, 1.01);
-  // mars.setOrbit(500, 150, 300, "indianred", Math.PI / 2);
+  const mars = createPlanet(scene, marsModel);
+  mars.realize();
+  mars.setShadow();
+  mars.setScale(5000 + 80000);
+  mars.setOrbit(52000, 5, 300, "indianred", Math.PI / 2);
 
-  const jupiter = createPlanet(scene, jupiter2Model);
+  const jupiter = createPlanet(scene, jupiterModel);
   jupiter.realize();
   jupiter.setShadow();
-  jupiter.setScale(800);
-  jupiter.setOutLine(orbitMaterial, 1.01);
-  jupiter.setOrbit(800, 1, 300, "indianred", Math.PI / 2);
+  jupiter.setScale(5000 + 40000);
+  jupiter.setOrbit(62000, 10, 300, "indianred", Math.PI / 2);
 
-  // const saturn = createPlanet(scene, saturnModel);
-  // saturn.realize();
-  // saturn.setShadow();
-  // saturn.setScale(800);
-  // saturn.setOutLine(orbitMaterial, 1.01);
-  // saturn.setOrbit(700, 150, 300, "indianred", Math.PI / 2);
+  const saturn = createPlanet(scene, saturnModel);
+  saturn.realize();
+  saturn.setShadow();
+  saturn.setScale(5000 + 40000);
+  saturn.setOrbit(72000, 10, 300, "indianred", Math.PI / 2);
 
-  // const uranus = createPlanet(scene, uranusModel);
-  // uranus.realize();
-  // uranus.setShadow();
-  // uranus.setScale(800);
-  // uranus.setOutLine(orbitMaterial, 1.01);
-  // uranus.setOrbit(500, 150, 300, "indianred", Math.PI / 2);
+  const uranus = createPlanet(scene, uranusModel);
+  uranus.realize();
+  uranus.setShadow();
+  uranus.setScale(5000 + 40000);
+  uranus.setOrbit(82000, 10, 300, "indianred", Math.PI / 2);
 
-  // const neptune = createPlanet(scene, neptuneModel);
-  // neptune.realize();
-  // neptune.setShadow();
-  // neptune.setScale(800);
-  // neptune.setOutLine(orbitMaterial, 1.01);
-  // neptune.setOrbit(600, 150, 300, "indianred", Math.PI / 2);
+  const neptune = createPlanet(scene, neptuneModel);
+  neptune.realize();
+  neptune.setShadow();
+  neptune.setScale(5000 + 40000);
+  neptune.setOrbit(88000, 15, 300, "indianred", Math.PI / 2);
 
-  // const pluto = createPlanet(scene, plutoModel);
-  // pluto.realize();
-  // pluto.setShadow();
-  // pluto.setScale(1000);
-  // pluto.setOutLine(orbitMaterial, 1.01);
-  // pluto.setOrbit(800, 100, 300, "indianred", Math.PI / 2 - 50);
+  const pluto = createPlanet(scene, plutoModel);
+  pluto.realize();
+  pluto.setShadow();
+  pluto.setScale(5000 + 90000);
+  pluto.setOrbit(108000, 10, 300, "indianred", Math.PI / 2 - 50);
 
-  // createStars({
-  //   scene,
-  //   texture: starTexture,
-  //   count: 800,
-  //   diffusionRate: 6000,
-  //   size: 50,
-  // });
+  createStars({
+    scene,
+    texture: starTexture,
+    count: 80000,
+    diffusionRate: 600000,
+    size: 50,
+  });
 
-  // const galaxy = createGalaxy(
-  //   scene,
-  //   600,
-  //   5,
-  //   15,
-  //   6,
-  //   0.18,
-  //   0.2,
-  //   3,
-  //   "indianred",
-  //   "#ff6030",
-  // );
-  // galaxy.realize();
-  // galaxy.setPosition(600, 700, 0);
-  // galaxy.setScale(30, 30, 30);
-  // galaxy.setRotation(Math.PI / 2.5, 0, Math.PI / 2.5);
+  const galaxy = createGalaxy(
+    scene,
+    15000,
+    100,
+    145,
+    6,
+    0.18,
+    0.2,
+    3,
+    "indianred",
+    "#ff6030",
+  );
+  galaxy.realize();
+  galaxy.setPosition(380000, -57000, 0);
+  galaxy.setScale(300, 300, 300);
+  galaxy.setRotation(Math.PI / 2.5, 0, Math.PI / 2.5);
 
-  // const galaxy2 = createGalaxy(
-  //   scene,
-  //   4000,
-  //   4,
-  //   150,
-  //   5,
-  //   0.2,
-  //   0.2,
-  //   3,
-  //   "indianred",
-  //   "indianred",
-  // );
-  // galaxy2.realize();
-  // galaxy2.setPosition(-500, 0, -200);
-  // galaxy2.setScale(300, 300, 300);
-  // galaxy2.setRotation(Math.PI / 2.5, 0, Math.PI / 2.5);
+  const galaxy2 = createGalaxy(
+    scene,
+    5000,
+    4,
+    85,
+    2,
+    0.2,
+    0.2,
+    3,
+    "indianred",
+    "indianred",
+  );
+  galaxy2.realize();
+  galaxy2.setPosition(-500, 347000, -200000);
+  galaxy2.setScale(300, 300, 300);
+  galaxy2.setRotation(Math.PI / 2.5, Math.PI / 2.5, Math.PI / 2.5);
 
-  // const galaxy3 = createGalaxy(
-  //   scene,
-  //   10000,
-  //   32,
-  //   15,
-  //   6,
-  //   1.2,
-  //   1.2,
-  //   3,
-  //   "#f79320",
-  //   "#85301b",
-  // );
-  // galaxy3.realize();
-  // galaxy3.setPosition(100, -700, -100);
-  // galaxy3.setScale(300, 300, 300);
-  // galaxy3.setRotation(Math.PI / 3, 0, Math.PI / 3);
+  const galaxy3 = createGalaxy(
+    scene,
+    10000,
+    22,
+    45,
+    6,
+    1.2,
+    1.2,
+    3,
+    "#f79320",
+    "#85301b",
+  );
+  galaxy3.realize();
+  galaxy3.setPosition(-280000, -47000, -100);
+  galaxy3.setScale(400, 400, 400);
+  galaxy3.setRotation(Math.PI / 3, 0, Math.PI / 3);
 
   //create object
   const leftGlove = createObject(scene, leftGloveModel.scene);
@@ -217,25 +197,12 @@ const main = async () => {
   rightGlove.setShadow();
   rightGlove.setScale(28);
 
-  // const astronaut = createObject(scene, astronautModel.scene);
-  // astronaut.realize();
-  // astronaut.setScale(10, 10, 10);
-  // astronaut.setPosition(0, 0, 0);
-  // astronaut.setShadow();
-
-  // const whale = createObject(scene, whaleModel);
-  // whale.realize();
-  // whale.setScale(130, 130, 130);
-  // whale.setPosition(100, 1200, 0);
-  // whale.setShadow();
-  // whale.animate(0);
-
-  // const spaceShip = createObject(scene, spaceShipModel.scene);
-  // spaceShip.realize();
-  // spaceShip.setScale(3000, 3000, 3000);
-  // spaceShip.setPosition(180000, 30000, 0);
-  // spaceShip.setShadow();
-  // spaceShip.model.rotation.x = -Math.PI / 2;
+  const whale = createObject(scene, whaleModel);
+  whale.realize();
+  whale.setScale(500, 500, 500);
+  whale.setPosition(10000, 600000, 0);
+  whale.setShadow();
+  whale.animate(0);
 
   // const cloudGroup = new THREE.Group();
   // scene.add(cloudGroup);
@@ -261,56 +228,73 @@ const main = async () => {
   // cloud3.setShadow();
   // cloudGroup.add(cloud3.model);
 
-  // const asteroidGroup = new THREE.Group();
-  // scene.add(asteroidGroup);
+  const asteroidGroup = new THREE.Group();
+  scene.add(asteroidGroup);
 
-  // const asteroids = createAsteroid(
-  //   asteroidGroup,
-  //   50,
-  //   100000,
-  //   200000,
-  //   100000,
-  //   30000,
-  //   10000,
-  //   30000,
-  //   100,
-  //   1000,
-  // );
-  // asteroids.setPosition(0, 300000, 0);
+  const asteroids = createAsteroid(
+    asteroidGroup,
+    70,
+    100000,
+    200000,
+    100000,
+    30000,
+    10000,
+    30000,
+    100,
+    1000,
+  );
+  asteroids.setPosition(0, 200000, 0);
 
-  // const asteroidGroup2 = new THREE.Group();
-  // scene.add(asteroidGroup2);
+  const asteroidGroup2 = new THREE.Group();
+  scene.add(asteroidGroup2);
 
-  // const asteroids2 = createAsteroid(
-  //   asteroidGroup2,
-  //   25,
-  //   400000,
-  //   800000,
-  //   10000,
-  //   30000,
-  //   100000,
-  //   300000,
-  //   200,
-  //   2000,
-  // );
-  // asteroids2.setPosition(-800000, -600000, 900000);
+  const asteroids2 = createAsteroid(
+    asteroidGroup2,
+    135,
+    400000,
+    800000,
+    10000,
+    500000,
+    100000,
+    700000,
+    20,
+    2000,
+  );
+  asteroids2.setPosition(-700000, -500000, 900000);
 
-  // const asteroidGroup3 = new THREE.Group();
-  // scene.add(asteroidGroup3);
+  const asteroidGroup3 = new THREE.Group();
+  scene.add(asteroidGroup3);
 
-  // const asteroids3 = createAsteroid(
-  //   asteroidGroup3,
-  //   20,
-  //   400000,
-  //   1000000,
-  //   500000,
-  //   1000000,
-  //   100000,
-  //   300000,
-  //   400,
-  //   8000,
-  // );
-  // asteroids3.setPosition(-4000000, -600000, 400000);
+  const asteroids3 = createAsteroid(
+    asteroidGroup3,
+    20,
+    4000,
+    1000000,
+    5000,
+    1000000,
+    1000,
+    300000,
+    40,
+    8000,
+  );
+  asteroids3.setPosition(-3000000, -600000, 100000);
+
+  const asteroidGroup4 = new THREE.Group();
+  scene.add(asteroidGroup4);
+
+  const asteroids4 = createAsteroid(
+    asteroidGroup4,
+    10,
+    1000,
+    1000000,
+    5000,
+    1000000,
+    1000,
+    300000,
+    40,
+    8000,
+  );
+  asteroids4.setPosition(700000, -600000, -900000);
 
   /**
    * Lights
@@ -318,7 +302,7 @@ const main = async () => {
   const ambientLight = new THREE.AmbientLight("white", 0.324);
   scene.add(ambientLight);
 
-  const sunLight = new THREE.PointLight("indianred", 4, 60000);
+  const sunLight = new THREE.PointLight("indianred", 6, 6000000);
   sunLight.castShadow = true;
   sunLight.shadow.mapSize.set(1024, 1024);
 
@@ -332,9 +316,8 @@ const main = async () => {
     75,
     sizes.width / sizes.height,
     1,
-    20000,
+    2500000,
   );
-  camera.position.y = 10;
 
   /**
    * Renderer
@@ -381,19 +364,23 @@ const main = async () => {
   /**
    * Pointer Lock with Y
    */
-  const clock = new THREE.Clock();
-  const controls = new PointLockWithY(camera, true, 500, 0.825, canvas);
-  scene.add(controls.camera);
-  controls.addListner();
+
+  // camera.position.y = 20000;
+  // camera.position.x = 50000;
+  // const controls = new PointLockWithY(camera, true, 1000, 0.825, canvas);
+  // scene.add(controls.camera);
+  // controls.addListner();
 
   /**
    * Orbit control
    */
-  // scene.add(camera);
-  // orbit controls
-  // const controls = new OrbitControls(camera, canvas);
-  // controls.enableDamping = true;
 
+  camera.position.y = 10000;
+  // orbit controls
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+
+  const clock = new THREE.Clock();
   let previousTime = 0;
   const tick = () => {
     /**
@@ -440,12 +427,13 @@ const main = async () => {
     rightGlove.model.rotateX(-1);
     rightGlove.model.rotateY(1);
 
-    // if (whale.animationMixer) {
-    //   whale.animationMixer.update(deltaTime / 10);
-    // }
-    // whale.rotate(0.0001, "y");
-
-    // spaceShip.rotate(0.005, "z");
+    /**
+     * whale animation
+     */
+    if (whale.animationMixer) {
+      whale.animationMixer.update(deltaTime / 10);
+    }
+    whale.rotate(0.0001, "y");
 
     // moveGroupAlongPath(
     //   cloudGroup,
@@ -459,32 +447,32 @@ const main = async () => {
 
     sun.rotate(0.0001);
 
-    // mercury.revolve(elapsedTime, 0.03, 20, 200, 1300);
-    // mercury.rotate(0.003);
+    mercury.revolve(elapsedTime, 0.03, 20, 30000, 10);
+    mercury.rotate(0.003);
 
-    // venus.revolve(elapsedTime, 0.03, 42, 260, 0);
-    // venus.rotate(0.003);
+    venus.revolve(elapsedTime, 0.03, 42, 36000, 0);
+    venus.rotate(0.003);
 
-    // earth.revolve(elapsedTime, 0.03, 23, 380, 0);
-    // earth.rotate(0.003);
+    earth.revolve(elapsedTime, 0.03, 23, 42000, 0);
+    earth.rotate(0.003);
 
-    // mars.revolve(elapsedTime, 0.03, 53, 500, 0);
-    // mars.rotate(0.003);
+    mars.revolve(elapsedTime, 0.03, 53, 52000, 0);
+    mars.rotate(0.003);
 
-    jupiter.revolve(elapsedTime, 0.03, 13, 800, 0);
-    // jupiter.rotate(0.003);
+    jupiter.revolve(elapsedTime, 0.03, 0, 62000, 0);
+    jupiter.rotate(0.003);
 
-    // saturn.revolve(elapsedTime, 0.03, 23, 700, 0);
-    // saturn.rotate(0.003);
+    saturn.revolve(elapsedTime, 0.03, 23, 72000, 0);
+    saturn.rotate(0.003);
 
-    // uranus.revolve(elapsedTime, 0.03, 62, 500, 0);
-    // uranus.rotate(0.003);
+    uranus.revolve(elapsedTime, 0.03, 62, 82000, 0);
+    uranus.rotate(0.003);
 
-    // neptune.revolve(elapsedTime, 0.03, 53, 600, 0);
-    // neptune.rotate(0.003);
+    neptune.revolve(elapsedTime, 0.03, 53, 88000, 0);
+    neptune.rotate(0.003);
 
-    // pluto.revolve(elapsedTime, 0.08, 73, 800, -20);
-    // pluto.rotate(0.003);
+    pluto.revolve(elapsedTime, 0.08, 73, 108000, -50);
+    pluto.rotate(0.003);
 
     // Update controls
     // controls.update();
