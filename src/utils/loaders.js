@@ -15,8 +15,8 @@ loadingManager.onError = function (url) {
   console.log("There was an error loading " + url);
 };
 
-const gltfLoader = new GLTFLoader();
-const fbxLoader = new FBXLoader();
+const gltfLoader = new GLTFLoader(loadingManager);
+const fbxLoader = new FBXLoader(loadingManager);
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager);
 
@@ -65,6 +65,10 @@ const _promisyfyModels = () => {
     "/textures/objects/spaceShip/cuteSpaceship.gltf",
     "/textures/objects/cloud/cloud.gltf",
     "/textures/astronaut/scene.gltf",
+    "/textures/test/sun/sun.gltf",
+    "/textures/test/jupiter/jupiter.gltf",
+    "/textures/gloves/leftGlove/scene.gltf",
+    "/textures/gloves/rightGlove/rightGlove.gltf",
   ];
 
   const gltfPromises = gltfUrls.map((url) => {
@@ -80,7 +84,8 @@ const _promisyfyModels = () => {
   ];
 };
 
-const loadAllModel = async () => {
+const loadAllModel = () => {
+  console.log("started");
   return Promise.all(_promisyfyModels());
 };
 

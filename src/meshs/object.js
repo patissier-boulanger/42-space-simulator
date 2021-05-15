@@ -33,7 +33,7 @@ const createObject = (scene, model, animationMixer = null) => {
       animation.play();
     },
 
-    moveAlongPath(verticeArray) {
+    moveAlongPath(verticeArray, group) {
       const path = new THREE.CatmullRomCurve3(verticeArray);
 
       if (counter <= 1) {
