@@ -70,6 +70,7 @@ class PointLockWithY {
     this.camera.lookAt(this.target);
   }
 
+  //업데이트 마우스 포지션
   onMouseMove(event) {
     this.movementX = event.movementX || 0;
     this.movementY = event.movementY || 0;

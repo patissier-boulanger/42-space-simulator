@@ -60,16 +60,10 @@ const createPlanet = (scene, model, startPosition, outlineBaseModel) => {
         Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
         Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
       );
-      // this.outlineBaseModel.position.set(
-      //   Math.cos(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
-      //   Math.sin(timer * rotationSpeedRate + startPosition) * rotationHeight,
-      //   Math.sin(timer * rotationSpeedRate + startPosition) * distanceFromAxis,
-      // );
     },
 
     rotate(rotateSpeedRate) {
       this.model.rotation.y += rotateSpeedRate;
-      // this.outlineBaseModel.rotation.y += rotateSpeedRate;
     },
 
     realize() {

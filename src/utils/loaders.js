@@ -1,19 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-
-const loadingManager = new THREE.LoadingManager();
-loadingManager.onLoad = function () {
-  console.log("Loading complete!");
-};
-
-loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
-  console.log(`Items loaded: ${itemsLoaded}/${itemsTotal}`);
-};
-
-loadingManager.onError = function (url) {
-  console.log("There was an error loading " + url);
-};
+import { loadingManager } from "../intro/intro";
 
 const gltfLoader = new GLTFLoader(loadingManager);
 const fbxLoader = new FBXLoader(loadingManager);
@@ -65,6 +53,8 @@ const _promisyfyModels = () => {
     "/textures/objects/cloud/cloud.gltf",
     "/textures/gloves/leftGlove/scene.gltf",
     "/textures/gloves/rightGlove/rightGlove.gltf",
+    "/textures/spaceStation/scene.gltf",
+    "/textures/astronaut/scene.gltf",
   ];
 
   const gltfPromises = gltfUrls.map((url) => {

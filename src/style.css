@@ -1,19 +1,65 @@
-*
-{
-    margin: 0;
-    padding: 0;
+@font-face {
+  font-family: remington;
+  src: url("../static/fonts/remington-noiseless.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: berylium;
+  src: url("../static/fonts/berylium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: dot;
+  src: url("../static/fonts/dot.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html,
-body
-{
-    overflow: hidden;
+body {
+  overflow: hidden;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+.intro-text {
+  color: white;
+  font-size: 4rem;
+  font-family: remington;
+}
+
+.hidden {
+  display: none;
+}
+
+.counter {
+  color: white;
+  position: fixed;
+  font-family: dot;
+  font-size: 4.5rem;
+  top: 1.5rem;
+  left: 2.5rem;
 }
