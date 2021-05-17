@@ -3,17 +3,16 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-
 import { DotScreenPass } from "three/examples/jsm/postprocessing/DotScreenPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 
 import * as dat from "dat.gui";
 
-import { createStars } from "./meshs/stars";
-import { createPlanet } from "./meshs/planet";
-import { createGalaxy } from "./meshs/galaxy";
-import { createObject } from "./meshs/object";
-import { createAsteroid } from "./meshs/asteroid";
+import { createStars } from "./objects/stars";
+import { createPlanet } from "./objects/planet";
+import { createGalaxy } from "./objects/galaxy";
+import { createObject } from "./objects/object";
+import { createAsteroid } from "./objects/asteroid";
 
 import { moveGroupAlongPath } from "./controller/meshController";
 import { PointLockWithY } from "./controller/pointLockController";
@@ -73,7 +72,7 @@ const main = async () => {
   sun.setShadow();
   sun.setScale(baseMeter);
   sun.setPosition(0, 0, 0, 0);
-  sun.setOutLine(orbitMaterial, 1.005);
+  // sun.setOutLine(orbitMaterial, 1.005);
   sun.realize();
 
   const mercury = createPlanet(scene, mecuryModel);

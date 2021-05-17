@@ -1,4 +1,59 @@
 import * as THREE from "three";
+import { Object } from "./object2";
+
+class Planet extends Object {
+  constructor(
+    scene,
+    model,
+    startPosition,
+    revolveSpeedRate,
+    rotationSpeedRate,
+    distanceFromAxis,
+    rotationHeight,
+  ) {
+    super();
+    this.scene = scene;
+    this.model = model.scene;
+    this.startPosition = startPosition;
+    this.revolveSpeedRate = revolveSpeedRate;
+    this.rotationSpeedRate = rotationSpeedRate;
+    this.distanceFromAxis = distanceFromAxis;
+    this.rotationHeight = rotationHeight;
+  }
+
+  setOrbit(radius, thickness, segments, color, xAxis) {
+    const orbitGeometry = new THREE.TorusGeometry(
+      radius,
+      thickness,
+      segments,
+      segments,
+    );
+    const orbitMaterial = new THREE.MeshStandardMaterial({
+      color: "white",
+      side: THREE.DoubleSide,
+    });
+    const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+    orbit.castShadow = true;
+    orbit.receiveShadow = true;
+    orbit.rotation.x = xAxis;
+    this.scene.add(orbit);
+  }
+
+  revolve(timer) {
+    this.model.position.set(
+      Math.cos(timer * this.revolveSpeedRate + this.startPosition) *
+        this.distanceFromAxis,
+      Math.sin(timer * this.revolveSpeedRate + this.startPosition) *
+        this.rotationHeight,
+      Math.sin(timer * this.revolveSpeedRate + this.startPosition) *
+        this.distanceFromAxis,
+    );
+  }
+
+  rotate() {
+    this.model.rotation.y += this.rotationSpeedRate;
+  }
+}
 
 const createPlanet = (scene, model, startPosition, outlineBaseModel) => {
   return {
@@ -72,4 +127,4 @@ const createPlanet = (scene, model, startPosition, outlineBaseModel) => {
   };
 };
 
-export { createPlanet };
+export { createPlanet, Planet };

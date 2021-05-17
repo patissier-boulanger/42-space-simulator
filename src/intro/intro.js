@@ -11,15 +11,15 @@ function pause(ms) {
 }
 
 loadingManager.onLoad = async () => {
-  await pause(2000);
-  introPageText.innerHTML = "I am pretty much fucked";
-  await pause(2000);
-  introPageText.innerHTML = "Left alone in the space";
-  await pause(2000);
-  introPageText.innerHTML = "Time left...";
-  await pause(2000);
-  introPageText.innerHTML = "42 minute";
-  await pause(3000);
+  // await pause(2000);
+  // introPageText.innerHTML = "I am pretty much fucked";
+  // await pause(2000);
+  // introPageText.innerHTML = "Left alone in the space";
+  // await pause(2000);
+  // introPageText.innerHTML = "Time left...";
+  // await pause(2000);
+  // introPageText.innerHTML = "42 minute";
+  // await pause(3000);
   introPage.classList.toggle("hidden");
   counter.classList.toggle("hidden");
   canvas.classList.toggle("hidden");
