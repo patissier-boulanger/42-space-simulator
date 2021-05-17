@@ -431,9 +431,8 @@ const main = async () => {
     const elapsedTime = clock.getElapsedTime();
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
-    // console.log(deltaTime);
-    // const deltaTime = clock.getDelta();
-    // console.log(deltaTime);
+
+    console.log(elapsedTime, deltaTime);
 
     /**
      * Pointer Lock update
@@ -520,7 +519,6 @@ const main = async () => {
     // controls.update();
 
     // Post processing Render
-
     effectComposer.render();
     // renderer.render(scene, camera);
 
@@ -532,16 +530,16 @@ const main = async () => {
   /**
    * Gui
    */
-  const sunlightFolder = gui.addFolder("sunlight");
-  sunlightFolder.add(sunLight, "intensity").min(0).max(100).step(1);
+  // const sunlightFolder = gui.addFolder("sunlight");
+  // sunlightFolder.add(sunLight, "intensity").min(0).max(100).step(1);
 
-  const ambientLightFolder = gui.addFolder("ambientLight");
-  ambientLightFolder.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+  // const ambientLightFolder = gui.addFolder("ambientLight");
+  // ambientLightFolder.add(ambientLight, "intensity").min(0).max(1).step(0.001);
 
-  gui.add(unrealBloomPass, "enabled");
-  gui.add(unrealBloomPass, "strength").min(0).max(2).step(0.001);
-  gui.add(unrealBloomPass, "radius").min(0).max(2).step(0.001);
-  gui.add(unrealBloomPass, "threshold").min(0).max(1).step(0.001);
+  // gui.add(unrealBloomPass, "enabled");
+  // gui.add(unrealBloomPass, "strength").min(0).max(2).step(0.001);
+  // gui.add(unrealBloomPass, "radius").min(0).max(2).step(0.001);
+  // gui.add(unrealBloomPass, "threshold").min(0).max(1).step(0.001);
 
   /**
    * Resize
@@ -564,9 +562,9 @@ const main = async () => {
   /**
    * PointLightHelper
    */
-  const sphereSize = 2;
-  const pointLightHelper = new THREE.PointLightHelper(sunLight, sphereSize);
-  scene.add(pointLightHelper);
+  // const sphereSize = 2;
+  // const pointLightHelper = new THREE.PointLightHelper(sunLight, sphereSize);
+  // scene.add(pointLightHelper);
 };
 
 main();

@@ -11,7 +11,8 @@ function pause(ms) {
 }
 
 loadingManager.onLoad = async () => {
-  console.log("Loading complete!");
+  await pause(2000);
+  introPageText.innerHTML = "I am pretty much fucked";
   await pause(2000);
   introPageText.innerHTML = "Left alone in the space";
   await pause(2000);
@@ -24,15 +25,13 @@ loadingManager.onLoad = async () => {
   canvas.classList.toggle("hidden");
 };
 
-loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+loadingManager.onProgress = async function (url, itemsLoaded, itemsTotal) {
   console.log(`Items loaded: ${itemsLoaded}/${itemsTotal}`);
-  introPageText.innerHTML = "I am pretty much fucked";
+  introPageText.innerHTML = "20XX/5/17";
 };
 
 loadingManager.onError = function (url) {
-  console.log("There was an error loading " + url);
+  console.error("There was an error loading " + url);
 };
-
-console.log();
 
 export { loadingManager };
