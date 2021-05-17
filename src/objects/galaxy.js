@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Object } from "./object2";
+import { Object } from "./object";
 
 class Galaxy extends Object {
   constructor(

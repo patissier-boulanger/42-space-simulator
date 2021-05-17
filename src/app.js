@@ -11,8 +11,8 @@ import { PointLockWithY } from "./controller/pointLockController";
 import { PlanetFactory } from "./factory/planetFactory";
 import { GalaxyFactory } from "./factory/galaxyFactory";
 import { AsteroidFactory } from "./factory/asteroidFactory";
+import { Model } from "./objects/model";
 import { Stars } from "./objects/stars";
-import { Galaxy } from "./objects/galaxy";
 
 class Simulator {
   constructor() {
@@ -68,11 +68,11 @@ class Simulator {
     this._addPostProcessor();
 
     //add controller
-    this.camera.position.set(970624, 212379, 29717); // startpoint;
+    this.camera.position.set(1170624, 212379, 29717); // startpoint;
     this.controls = new PointLockWithY(
       this.camera,
       true,
-      200000,
+      2000,
       0.825,
       this.canvas,
     );
@@ -96,8 +96,32 @@ class Simulator {
     const asteroids = new AsteroidFactory(this.scene);
     asteroids.realize();
 
-    // const galaxy = new Galaxy(this);
-    // galaxy.realize();
+    //add 3d object
+    this.leftGlove = new Model(this.scene, this.modelStorage.leftGloveModel);
+    this.leftGlove.realize();
+    this.leftGlove.setShadow();
+    this.leftGlove.setScale(6);
+
+    this.rightGlove = new Model(this.scene, this.modelStorage.rightGloveModel);
+    this.rightGlove.realize();
+    this.rightGlove.setShadow();
+    this.rightGlove.setScale(28);
+
+    const spaceStaion = new Model(
+      this.scene,
+      this.modelStorage.spaceStationModel,
+    );
+    spaceStaion.realize();
+    spaceStaion.setShadow();
+    spaceStaion.setScale(800);
+    spaceStaion.setPosition(1080000, 200000, 50000);
+
+    const astronaut = new Model(this.scene, this.modelStorage.astronautModel);
+    astronaut.realize();
+    astronaut.setShadow();
+    astronaut.setScale(40);
+    astronaut.setPosition(1189000, 200000, 0);
+    astronaut.model.rotation.x = 1;
 
     //animate per 60fps
     this._tick();
@@ -184,31 +208,31 @@ class Simulator {
     /**
      * Attach gloves to screen
      */
-    // this.modelStorage.leftGlove.model.position.copy(this.camera.position);
-    // this.modelStorage.leftGlove.model.rotation.set(
-    //   this.camera.rotation.x,
-    //   this.camera.rotation.y,
-    //   this.camera.rotation.z,
-    // );
+    this.leftGlove.model.position.copy(this.camera.position);
+    this.leftGlove.model.rotation.set(
+      this.camera.rotation.x,
+      this.camera.rotation.y,
+      this.camera.rotation.z,
+    );
 
-    // this.modelStorage.leftGlove.model.translateZ(-5);
-    // this.modelStorage.leftGlove.model.translateY(-5);
-    // this.modelStorage.leftGlove.model.translateX(-6);
-    // this.modelStorage.leftGlove.model.rotateX(-1);
-    // this.modelStorage.leftGlove.model.rotateY(2);
+    this.leftGlove.model.translateZ(-5);
+    this.leftGlove.model.translateY(-5);
+    this.leftGlove.model.translateX(-6);
+    this.leftGlove.model.rotateX(-1);
+    this.leftGlove.model.rotateY(2);
 
-    // this.modelStorage.rightGlove.model.position.copy(this.camera.position);
-    // this.modelStorage.rightGlove.model.rotation.set(
-    //   this.camera.rotation.x,
-    //   this.camera.rotation.y,
-    //   this.camera.rotation.z,
-    // );
+    this.rightGlove.model.position.copy(this.camera.position);
+    this.rightGlove.model.rotation.set(
+      this.camera.rotation.x,
+      this.camera.rotation.y,
+      this.camera.rotation.z,
+    );
 
-    // this.modelStorage.rightGlove.model.translateZ(-7);
-    // this.modelStorage.rightGlove.model.translateY(-5);
-    // this.modelStorage.rightGlove.model.translateX(7);
-    // this.modelStorage.rightGlove.model.rotateX(-1);
-    // this.modelStorage.rightGlove.model.rotateY(1);
+    this.rightGlove.model.translateZ(-7);
+    this.rightGlove.model.translateY(-5);
+    this.rightGlove.model.translateX(7);
+    this.rightGlove.model.rotateX(-1);
+    this.rightGlove.model.rotateY(1);
 
     this.effectComposer.render();
     requestAnimationFrame(this._tick.bind(this));

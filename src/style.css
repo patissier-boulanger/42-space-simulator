@@ -59,7 +59,16 @@ body {
   color: white;
   position: fixed;
   font-family: dot;
-  font-size: 5.5rem;
-  top: 1.5rem;
-  left: 2.5rem;
+  font-size: 6rem;
+  top: 2rem;
+  left: 3rem;
+}
+
+.caption {
+  color: white;
+  position: fixed;
+  font-family: remington;
+  font-size: 2rem;
+  bottom: 5rem;
+  left: 37%;
 }

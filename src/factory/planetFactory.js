@@ -18,7 +18,7 @@ class PlanetFactory {
       0,
     );
     sun.setShadow();
-    sun.setScale(700000);
+    sun.setScale(900000);
     sun.addToScene();
 
     const mercury = new Planet(
@@ -89,12 +89,12 @@ class PlanetFactory {
       62,
       0.007,
       0.0001,
-      500000 + 2200000,
+      500000 + 4200000,
       10,
     );
     jupiter.setShadow();
     jupiter.setScale(500000 + 5000000);
-    jupiter.setOrbit(500000 + 2200000, 150, 300, "indianred", Math.PI / 2);
+    jupiter.setOrbit(500000 + 4200000, 150, 300, "indianred", Math.PI / 2);
     jupiter.addToScene();
 
     const saturn = new Planet(
@@ -103,12 +103,12 @@ class PlanetFactory {
       22,
       0.007,
       0.0001,
-      500000 + 4800000,
+      500000 + 5800000,
       10,
     );
     saturn.setShadow();
     saturn.setScale(500000 + 5000000);
-    saturn.setOrbit(500000 + 4800000, 150, 300, "indianred", Math.PI / 2);
+    saturn.setOrbit(500000 + 5800000, 150, 300, "indianred", Math.PI / 2);
     saturn.addToScene();
 
     const uranus = new Planet(

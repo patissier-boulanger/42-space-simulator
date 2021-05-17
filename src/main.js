@@ -11,7 +11,7 @@ import * as dat from "dat.gui";
 import { createStars } from "./objects/stars";
 import { createPlanet } from "./objects/planet";
 import { createGalaxy } from "./objects/galaxy";
-import { createObject } from "./objects/object";
+import { createObject } from "./objects/model";
 import { createAsteroid } from "./objects/asteroid";
 
 import { moveGroupAlongPath } from "./controller/meshController";
