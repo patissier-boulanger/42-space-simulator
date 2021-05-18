@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import { loadingManager } from "../intro/intro";
+import { loadingManager } from "../utils/loadingManger";
 
 const gltfLoader = new GLTFLoader(loadingManager);
 const fbxLoader = new FBXLoader(loadingManager);

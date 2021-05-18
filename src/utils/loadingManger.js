@@ -1,4 +1,9 @@
 import * as THREE from "three";
+import { autorun } from "mobx";
+
+import { counterStore } from "../store/counterStore";
+import { captionStore } from "../store/captionStore";
+
 const introPage = document.querySelector(".intro");
 const introPageText = document.querySelector(".intro-text");
 const counter = document.querySelector(".counter");
@@ -7,22 +12,23 @@ const canvas = document.querySelector("canvas.webgl");
 
 const loadingManager = new THREE.LoadingManager();
 
-function pause(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 loadingManager.onLoad = async () => {
-  await pause(3000);
-  introPageText.innerHTML = "I am pretty much fucked";
-  await pause(3000);
-  introPageText.innerHTML = "Left alone in the space";
-  await pause(3000);
-  introPageText.innerHTML = "Time left... 42 minute";
-  await pause(3000);
+  autorun(() => {
+    introPageText.innerHTML = captionStore.currentCaption;
+  });
+
+  // autorun(() => {
+  //   counter.innerHTML = counterStore.count;
+  // });
+
+  await captionStore.showOpeningScript();
+
   introPage.classList.toggle("hidden");
   counter.classList.toggle("hidden");
   caption.classList.toggle("hidden");
   canvas.classList.toggle("hidden");
+
+  counterStore.step();
 };
 
 loadingManager.onProgress = async function (url, itemsLoaded, itemsTotal) {

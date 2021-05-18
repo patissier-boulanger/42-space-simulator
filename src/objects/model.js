@@ -22,7 +22,7 @@ class Model extends Object {
     animation.play();
   }
 
-  moveAlongPath(verticeArray, group) {
+  moveAlongPath(verticeArray) {
     const path = new THREE.CatmullRomCurve3(verticeArray);
 
     if (this.counter <= 1) {
@@ -78,7 +78,7 @@ const createObject = (scene, model, animationMixer = null) => {
       animation.play();
     },
 
-    moveAlongPath(verticeArray, group) {
+    moveAlongPath(verticeArray) {
       const path = new THREE.CatmullRomCurve3(verticeArray);
 
       if (counter <= 1) {

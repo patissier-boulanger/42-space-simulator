@@ -70,5 +70,6 @@ body {
   font-family: remington;
   font-size: 2rem;
   bottom: 5rem;
-  left: 37%;
+  left: 50%;
+  transform: translateX(-50%);
 }

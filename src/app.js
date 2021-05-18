@@ -4,6 +4,7 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { DotScreenPass } from "three/examples/jsm/postprocessing/DotScreenPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
+import { autorun } from "mobx";
 
 import { loadAllModel } from "./utils/loaders";
 import { PointLockWithY } from "./controller/pointLockController";
@@ -13,6 +14,9 @@ import { GalaxyFactory } from "./factory/galaxyFactory";
 import { AsteroidFactory } from "./factory/asteroidFactory";
 import { Model } from "./objects/model";
 import { Stars } from "./objects/stars";
+
+import { counterStore } from "./store/counterStore";
+import { captionStore } from "./store/captionStore";
 
 class Simulator {
   constructor() {
@@ -54,6 +58,15 @@ class Simulator {
       modelStorage.astronautModel,
     ] = await loadAllModel();
     this.modelStorage = modelStorage;
+
+    //add state
+    autorun(() => {
+      captionStore.showCounterScript(counterStore.count);
+    });
+
+    autorun(() => {
+      counterStore.update(counterStore.count);
+    });
 
     //add light
     this._addLight();
