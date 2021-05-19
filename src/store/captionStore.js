@@ -1,5 +1,6 @@
 import { observable, action, makeObservable } from "mobx";
 const caption = document.querySelector(".caption");
+const introPageText = document.querySelector(".intro-text");
 
 class CaptionStore {
   constructor() {
@@ -8,6 +9,7 @@ class CaptionStore {
       currentCaption: observable,
       showOpeningScript: action,
       showCounterScript: action,
+      showEndingScript: action,
       clearCaption: action,
       changeCaption: action,
       pause: action,
@@ -16,12 +18,18 @@ class CaptionStore {
 
   async showOpeningScript() {
     await this.pause(3000);
-    this.changeCaption("I am pretty much fucked");
+    introPageText.innerHTML = "I am pretty much fucked";
     await this.pause(3000);
-    this.changeCaption("Left alone in the space");
+    introPageText.innerHTML = "Left alone in the space";
     await this.pause(3000);
-    this.changeCaption("Time left... 42 minute");
+    introPageText.innerHTML = "Time left... 42 minute";
     await this.pause(3000);
+    introPageText.innerHTML = "";
+  }
+
+  async showEndingScript() {
+    await this.pause(8000);
+    introPageText.innerHTML = "42 space simulator";
   }
 
   changeCaption(caption) {
@@ -60,7 +68,7 @@ class CaptionStore {
         break;
 
       case 10:
-        this.changeCaption("I'm getting cold. ");
+        this.changeCaption("I'm getting cold.");
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";

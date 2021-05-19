@@ -8,8 +8,6 @@ class PointLockWithY {
     this.movementSpeed = movementSpeed;
     this.lookSpeed = lookSpeed;
     this.domElement = canvas;
-
-    //prvate
     this.moveForward = false;
     this.moveBackward = false;
     this.moveLeft = false;
@@ -21,6 +19,9 @@ class PointLockWithY {
     this.lon = 0;
     this.phi = 0;
     this.theta = 0;
+
+    this.mouse = new THREE.Vector2();
+    this.rayCaster = new THREE.Raycaster();
   }
 
   update(delta) {
@@ -67,77 +68,80 @@ class PointLockWithY {
     this.target.z =
       this.camera.position.z + 100 * Math.sin(this.phi) * Math.sin(this.theta);
 
+    this.rayCaster.setFromCamera(this.mouse, this.camera);
     this.camera.lookAt(this.target);
   }
 
-  //업데이트 마우스 포지션
   onMouseMove(event) {
     this.movementX = event.movementX || 0;
     this.movementY = event.movementY || 0;
+
+    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   }
 
   onKeyDown(event) {
     switch (event.keyCode) {
-      case 38: /*up*/
+      case 38:
       case 87:
-        /*W*/ this.moveForward = true;
+        this.moveForward = true;
         break;
 
-      case 37: /*left*/
+      case 37:
       case 65:
-        /*A*/ this.moveLeft = true;
+        this.moveLeft = true;
         break;
 
-      case 40: /*down*/
+      case 40:
       case 83:
-        /*S*/ this.moveBackward = true;
+        this.moveBackward = true;
         break;
 
-      case 39: /*right*/
+      case 39:
       case 68:
-        /*D*/ this.moveRight = true;
+        this.moveRight = true;
         break;
 
       case 82:
-        /*R*/ this.moveUp = true;
+        this.moveUp = true;
         break;
       case 70:
-        /*F*/ this.moveDown = true;
+        this.moveDown = true;
         break;
 
       case 81:
-        /*Q*/ this.freeze = !this.freeze;
+        this.freeze = !this.freeze;
         break;
     }
   }
 
   onKeyUp(event) {
     switch (event.keyCode) {
-      case 38: /*up*/
+      case 38:
       case 87:
-        /*W*/ this.moveForward = false;
+        this.moveForward = false;
         break;
 
-      case 37: /*left*/
+      case 37:
       case 65:
-        /*A*/ this.moveLeft = false;
+        this.moveLeft = false;
         break;
 
-      case 40: /*down*/
+      case 40:
       case 83:
-        /*S*/ this.moveBackward = false;
+        this.moveBackward = false;
         break;
 
-      case 39: /*right*/
+      case 39:
       case 68:
-        /*D*/ this.moveRight = false;
+        this.moveRight = false;
         break;
 
       case 82:
-        /*R*/ this.moveUp = false;
+        this.moveUp = false;
         break;
       case 70:
-        /*F*/ this.moveDown = false;
+        this.moveDown = false;
         break;
     }
   }

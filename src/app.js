@@ -17,10 +17,11 @@ import { Stars } from "./objects/stars";
 
 import { counterStore } from "./store/counterStore";
 import { captionStore } from "./store/captionStore";
+import { soundStore } from "./store/soundStore";
 
 class Simulator {
   constructor() {
-    this._initialize();
+    this._startSimulator();
   }
 
   async _initialize() {
@@ -61,12 +62,32 @@ class Simulator {
 
     //add state
     autorun(() => {
+      counterStore.update(counterStore.count);
+    });
+
+    autorun(() => {
       captionStore.showCounterScript(counterStore.count);
     });
 
     autorun(() => {
-      counterStore.update(counterStore.count);
+      this._endSimulator(counterStore.count);
     });
+
+    autorun(() => {
+      if (counterStore.count === 30) {
+        soundStore.lowerVolume(counterStore.count);
+      }
+
+      if (counterStore.count === 10) {
+        soundStore.lowerVolume(counterStore.count);
+      }
+    });
+
+    //play sound
+    soundStore.playSound(soundStore.breathingSound, 1);
+    soundStore.playSound(soundStore.alarm1, 0.2);
+    soundStore.playSound(soundStore.alarm2, 0.2);
+    soundStore.playSound(soundStore.spaceSound, 0.9);
 
     //add light
     this._addLight();
@@ -135,6 +156,8 @@ class Simulator {
     astronaut.setScale(40);
     astronaut.setPosition(1189000, 200000, 0);
     astronaut.model.rotation.x = 1;
+
+    this.astronaut = astronaut;
 
     //animate per 60fps
     this._tick();
@@ -213,6 +236,15 @@ class Simulator {
 
     this.controls.update(deltaTime);
 
+    const result = this.controls.rayCaster.intersectObject(
+      this.astronaut.model,
+      true,
+    );
+
+    if (result.length) {
+      console.log(result);
+    }
+
     this.solarSystem.planets.forEach((planet) => {
       planet.revolve(elapsedTime);
       planet.rotate();
@@ -248,7 +280,7 @@ class Simulator {
     this.rightGlove.model.rotateY(1);
 
     this.effectComposer.render();
-    requestAnimationFrame(this._tick.bind(this));
+    this.requestAnimationFrameId = requestAnimationFrame(this._tick.bind(this));
   }
 
   _onWindowResize() {
@@ -264,8 +296,32 @@ class Simulator {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
   }
+
+  _endSimulator(counter) {
+    if (counter === 0) {
+      soundStore.pauseSound(soundStore.spaceSound);
+
+      cancelAnimationFrame(this.requestAnimationFrameId);
+      const counter = document.querySelector(".counter");
+      const caption = document.querySelector(".caption");
+      const introPage = document.querySelector(".intro");
+
+      this.canvas.classList.toggle("fadeIn");
+      counter.classList.toggle("hidden");
+      caption.classList.toggle("hidden");
+
+      introPage.classList.toggle("fadeOut");
+      captionStore.showEndingScript();
+    }
+  }
+
+  _startSimulator() {
+    const askPermission = () => {
+      this._initialize();
+    };
+
+    window.addEventListener("click", askPermission.bind(this), { once: true });
+  }
 }
 
 const app = new Simulator();
-
-console.log(app);

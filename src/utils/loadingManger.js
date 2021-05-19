@@ -3,6 +3,7 @@ import { autorun } from "mobx";
 
 import { counterStore } from "../store/counterStore";
 import { captionStore } from "../store/captionStore";
+import { soundStore } from "../store/soundStore";
 
 const introPage = document.querySelector(".intro");
 const introPageText = document.querySelector(".intro-text");
@@ -13,21 +14,15 @@ const canvas = document.querySelector("canvas.webgl");
 const loadingManager = new THREE.LoadingManager();
 
 loadingManager.onLoad = async () => {
-  autorun(() => {
-    introPageText.innerHTML = captionStore.currentCaption;
-  });
-
-  // autorun(() => {
-  //   counter.innerHTML = counterStore.count;
-  // });
-
   await captionStore.showOpeningScript();
 
-  introPage.classList.toggle("hidden");
+  introPage.classList.toggle("fadeOut");
   counter.classList.toggle("hidden");
   caption.classList.toggle("hidden");
   canvas.classList.toggle("hidden");
 
+  soundStore.pauseSound(soundStore.alarm1);
+  soundStore.pauseSound(soundStore.alarm2);
   counterStore.step();
 };
 
