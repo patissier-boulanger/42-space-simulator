@@ -1,10 +1,9 @@
 import * as THREE from "three";
 
-const useHelpers = (scene) => {
-  const axesHelper = new THREE.AxesHelper(50);
-
-  // const gridHelper = new THREE.GridHelper(4000, 4000);
-  scene.add(axesHelper);
+const useHelpers = (scene, axeLength, gridSize) => {
+  const axesHelper = new THREE.AxesHelper(axeLength);
+  const gridHelper = new THREE.GridHelper(gridSize, gridSize);
+  scene.add(axesHelper, gridHelper);
 };
 
 export { useHelpers };

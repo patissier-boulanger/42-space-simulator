@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js";
+import * as CANNON from "cannon-es";
 
 class PointLockWithY {
-  constructor(camera, enabled, movementSpeed, lookSpeed, canvas) {
+  constructor(camera, enabled, movementSpeed, lookSpeed, canvas, scene) {
     this.camera = camera;
     this.enabled = enabled;
     this.movementSpeed = movementSpeed;
@@ -22,6 +22,7 @@ class PointLockWithY {
 
     this.mouse = new THREE.Vector2();
     this.rayCaster = new THREE.Raycaster();
+    this.scene = scene;
   }
 
   update(delta) {
@@ -70,6 +71,8 @@ class PointLockWithY {
 
     this.rayCaster.setFromCamera(this.mouse, this.camera);
     this.camera.lookAt(this.target);
+
+    this.cannonBody.position.copy(this.camera.position);
   }
 
   onMouseMove(event) {
@@ -162,6 +165,19 @@ class PointLockWithY {
     window.addEventListener("keydown", this.onKeyDown.bind(this), false);
     window.addEventListener("keyup", this.onKeyUp.bind(this), false);
     window.addEventListener("click", this.lock.bind(this), false);
+  }
+
+  addPhysicsPointer(cannonWorld, material) {
+    const shape = new CANNON.Sphere(700);
+    const body = new CANNON.Body({
+      mass: 10,
+      position: new CANNON.Vec3(0, 0, 0),
+      shape: shape,
+      material: material,
+    });
+    this.cannonBody = body;
+
+    cannonWorld.addBody(this.cannonBody);
   }
 }
 

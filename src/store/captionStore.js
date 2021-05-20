@@ -1,45 +1,53 @@
 import { observable, action, makeObservable } from "mobx";
+
+import {
+  emptyLine,
+  introCaptions,
+  counterCaptions,
+  endingLine,
+} from "../constant/caption";
+
 const caption = document.querySelector(".caption");
 const introPageText = document.querySelector(".intro-text");
 
 class CaptionStore {
   constructor() {
-    this.currentCaption = "";
+    this.currentCaption = emptyLine;
     makeObservable(this, {
       currentCaption: observable,
-      showOpeningScript: action,
-      showCounterScript: action,
-      showEndingScript: action,
+      showOpeningCaption: action,
+      showCounterCaption: action,
+      showEndingCaption: action,
       clearCaption: action,
       changeCaption: action,
       pause: action,
     });
   }
 
-  async showOpeningScript() {
+  async showOpeningCaption() {
     await this.pause(3000);
-    introPageText.innerHTML = "I am pretty much fucked";
+    introPageText.innerHTML = introCaptions.line1;
     await this.pause(3000);
-    introPageText.innerHTML = "Left alone in the space";
+    introPageText.innerHTML = introCaptions.line2;
     await this.pause(3000);
-    introPageText.innerHTML = "Time left... 42 minute";
+    introPageText.innerHTML = introCaptions.line3;
     await this.pause(3000);
-    introPageText.innerHTML = "";
+    introPageText.innerHTML = emptyLine;
   }
 
-  async showEndingScript() {
+  async showEndingCaption() {
     await this.pause(8000);
-    introPageText.innerHTML = "42 space simulator";
+    introPageText.innerHTML = endingLine;
   }
 
   changeCaption(caption) {
     this.currentCaption = caption;
   }
 
-  async showCounterScript(count) {
+  async showCounterCaption(count) {
     switch (count) {
       case 40:
-        this.changeCaption("So this is the end.");
+        this.changeCaption(counterCaptions.line1);
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";
@@ -47,35 +55,35 @@ class CaptionStore {
         break;
 
       case 36:
-        this.changeCaption("Far from home.");
+        this.changeCaption(counterCaptions.line2);
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";
         break;
 
       case 30:
-        this.changeCaption("Maybe i should stay at home.");
+        this.changeCaption(counterCaptions.line3);
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";
         break;
 
       case 25:
-        this.changeCaption("Or maybe i should't buy those doge coin");
+        this.changeCaption(counterCaptions.line4);
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";
         break;
 
       case 10:
-        this.changeCaption("I'm getting cold.");
+        this.changeCaption(counterCaptions.line5);
         caption.innerHTML = this.currentCaption;
         await this.pause(4000);
         caption.innerHTML = "";
         break;
 
       case 1:
-        this.changeCaption("Time to go");
+        this.changeCaption(counterCaptions.line6);
         caption.innerHTML = this.currentCaption;
         await this.pause(1000);
         caption.innerHTML = "";
@@ -84,7 +92,7 @@ class CaptionStore {
   }
 
   clearCaption() {
-    this.currentCaption = "";
+    this.currentCaption = emptyLine;
   }
 
   pause(ms) {

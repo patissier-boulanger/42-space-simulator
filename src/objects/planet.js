@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { Object } from "./object";
 
 class Planet extends Object {
@@ -6,7 +7,7 @@ class Planet extends Object {
     scene,
     model,
     startPosition,
-    revolveSpeedRate,
+    revolutionSpeedRate,
     rotationSpeedRate,
     distanceFromAxis,
     rotationHeight,
@@ -15,7 +16,7 @@ class Planet extends Object {
     this.scene = scene;
     this.model = model.scene;
     this.startPosition = startPosition;
-    this.revolveSpeedRate = revolveSpeedRate;
+    this.revolutionSpeedRate = revolutionSpeedRate;
     this.rotationSpeedRate = rotationSpeedRate;
     this.distanceFromAxis = distanceFromAxis;
     this.rotationHeight = rotationHeight;
@@ -41,11 +42,11 @@ class Planet extends Object {
 
   revolve(timer) {
     this.model.position.set(
-      Math.cos(timer * this.revolveSpeedRate + this.startPosition) *
+      Math.cos(timer * this.revolutionSpeedRate + this.startPosition) *
         this.distanceFromAxis,
-      Math.sin(timer * this.revolveSpeedRate + this.startPosition) *
+      Math.sin(timer * this.revolutionSpeedRate + this.startPosition) *
         this.rotationHeight,
-      Math.sin(timer * this.revolveSpeedRate + this.startPosition) *
+      Math.sin(timer * this.revolutionSpeedRate + this.startPosition) *
         this.distanceFromAxis,
     );
   }

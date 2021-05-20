@@ -1,4 +1,5 @@
 import { observable, action, makeObservable } from "mobx";
+
 const counter = document.querySelector(".counter");
 
 class CounterStore {

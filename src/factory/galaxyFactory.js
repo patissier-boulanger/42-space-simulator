@@ -1,4 +1,9 @@
 import { Galaxy } from "../objects/galaxy";
+import {
+  smallGalaxyCharacteristics,
+  mediumGalaxyCharacteristics,
+  grandGalaxyCharacteristics,
+} from "../constant/galaxy";
 
 class GalaxyFactory {
   constructor(scene) {
@@ -8,56 +13,92 @@ class GalaxyFactory {
   realize() {
     const smallGalaxy = new Galaxy(
       this.scene,
-      1500,
-      100,
-      2045,
-      6,
-      0.18,
-      0.2,
-      3,
-      "indianred",
-      "#ff6030",
+      smallGalaxyCharacteristics.count,
+      smallGalaxyCharacteristics.size,
+      smallGalaxyCharacteristics.radius,
+      smallGalaxyCharacteristics.branches,
+      smallGalaxyCharacteristics.spin,
+      smallGalaxyCharacteristics.randomness,
+      smallGalaxyCharacteristics.randomnessPower,
+      smallGalaxyCharacteristics.insideColor,
+      smallGalaxyCharacteristics.ousideColor,
     );
     smallGalaxy.create();
-    smallGalaxy.setPosition(10800000, -5700000, 0);
-    smallGalaxy.setScale(600, 600, 600);
-    smallGalaxy.setRotation(Math.PI / 2.5, 0, Math.PI / 2.5);
+    smallGalaxy.setPosition(
+      smallGalaxyCharacteristics.position.x,
+      smallGalaxyCharacteristics.position.y,
+      smallGalaxyCharacteristics.position.z,
+    );
+    smallGalaxy.setScale(
+      smallGalaxyCharacteristics.scale.x,
+      smallGalaxyCharacteristics.scale.y,
+      smallGalaxyCharacteristics.scale.z,
+    );
+    smallGalaxy.setRotation(
+      smallGalaxyCharacteristics.rotation.x,
+      smallGalaxyCharacteristics.rotation.y,
+      smallGalaxyCharacteristics.rotation.z,
+    );
     smallGalaxy.addToScene();
 
     const mediumGalaxy = new Galaxy(
       this.scene,
-      20000,
-      4,
-      5005,
-      6,
-      5.2,
-      0.2,
-      1,
-      "indianred",
-      "indianred",
+      mediumGalaxyCharacteristics.count,
+      mediumGalaxyCharacteristics.size,
+      mediumGalaxyCharacteristics.radius,
+      mediumGalaxyCharacteristics.branches,
+      mediumGalaxyCharacteristics.spin,
+      mediumGalaxyCharacteristics.randomness,
+      mediumGalaxyCharacteristics.randomnessPower,
+      mediumGalaxyCharacteristics.insideColor,
+      mediumGalaxyCharacteristics.ousideColor,
     );
     mediumGalaxy.create();
-    mediumGalaxy.setPosition(-500, 10470000, -2000000);
-    mediumGalaxy.setScale(300, 300, 300);
-    mediumGalaxy.setRotation(Math.PI / 2.5, Math.PI / 2.5, Math.PI / 2.5);
+    mediumGalaxy.setPosition(
+      mediumGalaxyCharacteristics.position.x,
+      mediumGalaxyCharacteristics.position.y,
+      mediumGalaxyCharacteristics.position.z,
+    );
+    mediumGalaxy.setScale(
+      mediumGalaxyCharacteristics.scale.x,
+      mediumGalaxyCharacteristics.scale.y,
+      mediumGalaxyCharacteristics.scale.z,
+    );
+    mediumGalaxy.setRotation(
+      mediumGalaxyCharacteristics.rotation.x,
+      mediumGalaxyCharacteristics.rotation.y,
+      mediumGalaxyCharacteristics.rotation.z,
+    );
     mediumGalaxy.addToScene();
 
     const grandGalaxy = new Galaxy(
       this.scene,
-      20000,
-      52,
-      850,
-      6,
-      2.2,
-      1.2,
-      3,
-      "#f79320",
-      "#85301b",
+      grandGalaxyCharacteristics.count,
+      grandGalaxyCharacteristics.size,
+      grandGalaxyCharacteristics.radius,
+      grandGalaxyCharacteristics.branches,
+      grandGalaxyCharacteristics.spin,
+      grandGalaxyCharacteristics.randomness,
+      grandGalaxyCharacteristics.randomnessPower,
+      grandGalaxyCharacteristics.insideColor,
+      grandGalaxyCharacteristics.ousideColor,
     );
     grandGalaxy.create();
-    grandGalaxy.setPosition(-680000, 670000, -10000);
-    grandGalaxy.setScale(400, 400, 400);
-    grandGalaxy.setRotation(Math.PI / 3, 0, Math.PI / 3);
+    grandGalaxy.setPosition(
+      grandGalaxyCharacteristics.position.x,
+      grandGalaxyCharacteristics.position.y,
+      grandGalaxyCharacteristics.position.z,
+    );
+    grandGalaxy.setScale(
+      grandGalaxyCharacteristics.scale.x,
+      grandGalaxyCharacteristics.scale.y,
+      grandGalaxyCharacteristics.scale.z,
+    );
+    grandGalaxy.setRotation(
+      grandGalaxyCharacteristics.rotation.x,
+      grandGalaxyCharacteristics.rotation.y,
+      grandGalaxyCharacteristics.rotation.z,
+    );
     grandGalaxy.addToScene();
   }
 }

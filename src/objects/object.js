@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import * as CANNON from "cannon-es";
+import { threeToCannon, ShapeType } from "three-to-cannon";
 
 class Object {
   setShadow() {
@@ -20,6 +22,28 @@ class Object {
 
   addToScene() {
     this.scene.add(this.model);
+  }
+
+  addPhysics(objectsToUpdate, physicsWorld) {
+    const canonShape = threeToCannon(this.model, {
+      type: ShapeType.BOX,
+    });
+
+    const body = new CANNON.Body({
+      mass: 1,
+      position: new CANNON.Vec3(0, 0, 0),
+      shape: canonShape.shape,
+      material: this.defaultMaterial,
+    });
+    body.position.set(
+      this.model.position.x,
+      this.model.position.y,
+      this.model.position.z,
+    );
+
+    physicsWorld.addBody(body);
+
+    objectsToUpdate.push({ model: this.model, body });
   }
 }
 

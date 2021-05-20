@@ -1,4 +1,16 @@
 import { Planet } from "../objects/planet";
+import {
+  sunCharacteristics,
+  mercuryCharacteristics,
+  venusCharacteristics,
+  earthCharacteristics,
+  marsCharacteristics,
+  jupiterCharacteristics,
+  saturnCharacteristics,
+  uranusCharacteristics,
+  neptuneCharacteristics,
+  plutoCharacteristics,
+} from "../constant/planet";
 
 class PlanetFactory {
   constructor(scene, modelStorage) {
@@ -11,146 +23,194 @@ class PlanetFactory {
     const sun = new Planet(
       this.scene,
       this.modelStorage.sunModel,
-      0,
-      0,
-      0.0001,
-      0,
-      0,
+      sunCharacteristics.startPosition,
+      sunCharacteristics.revolutionSpeedRate,
+      sunCharacteristics.rotationSpeedRate,
+      sunCharacteristics.distanceFromAxis,
+      sunCharacteristics.rotationHeight,
     );
     sun.setShadow();
-    sun.setScale(900000);
+    sun.setScale(sunCharacteristics.scale);
     sun.addToScene();
 
     const mercury = new Planet(
       this.scene,
       this.modelStorage.mecuryModel,
-      20,
-      0.007,
-      0.0001,
-      500000 + 600000,
-      10,
+      mercuryCharacteristics.startPosition,
+      mercuryCharacteristics.revolutionSpeedRate,
+      mercuryCharacteristics.rotationSpeedRate,
+      mercuryCharacteristics.distanceFromAxis,
+      mercuryCharacteristics.rotationHeight,
     );
     mercury.setShadow();
-    mercury.setScale(500000 + 6000000);
+    mercury.setScale(mercuryCharacteristics.scale);
     mercury.setOrbit(
-      500000 + 600000,
-      150,
-      300,
-      "indianred",
-      Math.PI / 2 - 0.15,
+      mercuryCharacteristics.distanceFromAxis,
+      mercuryCharacteristics.orbit.thickness,
+      mercuryCharacteristics.orbit.segment,
+      mercuryCharacteristics.orbit.color,
+      mercuryCharacteristics.orbit.xAxis,
     );
     mercury.addToScene();
 
     const venus = new Planet(
       this.scene,
       this.modelStorage.venusModel,
-      42,
-      0.007,
-      0.0001,
-      500000 + 800000,
-      10,
+      venusCharacteristics.startPosition,
+      venusCharacteristics.revolutionSpeedRate,
+      venusCharacteristics.rotationSpeedRate,
+      venusCharacteristics.distanceFromAxis,
+      venusCharacteristics.rotationHeight,
     );
     venus.setShadow();
-    venus.setScale(500000 + 6000000);
-    venus.setOrbit(500000 + 800000, 150, 300, "indianred", Math.PI / 2);
+    venus.setScale(venusCharacteristics.scale);
+    venus.setOrbit(
+      venusCharacteristics.distanceFromAxis,
+      venusCharacteristics.orbit.thickness,
+      venusCharacteristics.orbit.segment,
+      venusCharacteristics.orbit.color,
+      venusCharacteristics.orbit.xAxis,
+    );
     venus.addToScene();
 
     const earth = new Planet(
       this.scene,
       this.modelStorage.earthModel,
-      32,
-      0.007,
-      0.0001,
-      500000 + 1200000,
-      10,
+      earthCharacteristics.startPosition,
+      earthCharacteristics.revolutionSpeedRate,
+      earthCharacteristics.rotationSpeedRate,
+      earthCharacteristics.distanceFromAxis,
+      earthCharacteristics.rotationHeight,
     );
     earth.setShadow();
-    earth.setScale(500000 + 8000000);
-    earth.setOrbit(500000 + 1200000, 150, 300, "indianred", Math.PI / 2);
+    earth.setScale(earthCharacteristics.scale);
+    earth.setOrbit(
+      earthCharacteristics.distanceFromAxis,
+      earthCharacteristics.orbit.thickness,
+      earthCharacteristics.orbit.segment,
+      earthCharacteristics.orbit.color,
+      earthCharacteristics.orbit.xAxis,
+    );
     earth.addToScene();
 
     const mars = new Planet(
       this.scene,
       this.modelStorage.marsModel,
-      52,
-      0.007,
-      0.0001,
-      500000 + 1600000,
-      10,
+      marsCharacteristics.startPosition,
+      marsCharacteristics.revolutionSpeedRate,
+      marsCharacteristics.rotationSpeedRate,
+      marsCharacteristics.distanceFromAxis,
+      marsCharacteristics.rotationHeight,
     );
     mars.setShadow();
-    mars.setScale(500000 + 8000000);
-    mars.setOrbit(500000 + 1600000, 150, 300, "indianred", Math.PI / 2);
+    mars.setScale(marsCharacteristics.scale);
+    mars.setOrbit(
+      marsCharacteristics.distanceFromAxis,
+      marsCharacteristics.orbit.thickness,
+      marsCharacteristics.orbit.segment,
+      marsCharacteristics.orbit.color,
+      marsCharacteristics.orbit.xAxis,
+    );
     mars.addToScene();
 
     const jupiter = new Planet(
       this.scene,
       this.modelStorage.jupiterModel,
-      62,
-      0.007,
-      0.0001,
-      500000 + 4200000,
-      10,
+      jupiterCharacteristics.startPosition,
+      jupiterCharacteristics.revolutionSpeedRate,
+      jupiterCharacteristics.rotationSpeedRate,
+      jupiterCharacteristics.distanceFromAxis,
+      jupiterCharacteristics.rotationHeight,
     );
     jupiter.setShadow();
-    jupiter.setScale(500000 + 5000000);
-    jupiter.setOrbit(500000 + 4200000, 150, 300, "indianred", Math.PI / 2);
+    jupiter.setScale(jupiterCharacteristics.scale);
+    jupiter.setOrbit(
+      jupiterCharacteristics.distanceFromAxis,
+      jupiterCharacteristics.orbit.thickness,
+      jupiterCharacteristics.orbit.segment,
+      jupiterCharacteristics.orbit.color,
+      jupiterCharacteristics.orbit.xAxis,
+    );
     jupiter.addToScene();
 
     const saturn = new Planet(
       this.scene,
       this.modelStorage.saturnModel,
-      22,
-      0.007,
-      0.0001,
-      500000 + 5800000,
-      10,
+      saturnCharacteristics.startPosition,
+      saturnCharacteristics.revolutionSpeedRate,
+      saturnCharacteristics.rotationSpeedRate,
+      saturnCharacteristics.distanceFromAxis,
+      saturnCharacteristics.rotationHeight,
     );
     saturn.setShadow();
-    saturn.setScale(500000 + 5000000);
-    saturn.setOrbit(500000 + 5800000, 150, 300, "indianred", Math.PI / 2);
+    saturn.setScale(saturnCharacteristics.scale);
+    saturn.setOrbit(
+      saturnCharacteristics.distanceFromAxis,
+      saturnCharacteristics.orbit.thickness,
+      saturnCharacteristics.orbit.segment,
+      saturnCharacteristics.orbit.color,
+      saturnCharacteristics.orbit.xAxis,
+    );
     saturn.addToScene();
 
     const uranus = new Planet(
       this.scene,
       this.modelStorage.uranusModel,
-      42,
-      0.007,
-      0.0001,
-      500000 + 6800000,
-      10,
+      uranusCharacteristics.startPosition,
+      uranusCharacteristics.revolutionSpeedRate,
+      uranusCharacteristics.rotationSpeedRate,
+      uranusCharacteristics.distanceFromAxis,
+      uranusCharacteristics.rotationHeight,
     );
     uranus.setShadow();
-    uranus.setScale(500000 + 5000000);
-    uranus.setOrbit(500000 + 6800000, 150, 300, "indianred", Math.PI / 2);
+    uranus.setScale(uranusCharacteristics.scale);
+    uranus.setOrbit(
+      uranusCharacteristics.distanceFromAxis,
+      uranusCharacteristics.orbit.thickness,
+      uranusCharacteristics.orbit.segment,
+      uranusCharacteristics.orbit.color,
+      uranusCharacteristics.orbit.xAxis,
+    );
     uranus.addToScene();
 
     const neptune = new Planet(
       this.scene,
       this.modelStorage.neptuneModel,
-      62,
-      0.007,
-      0.0001,
-      500000 + 8800000,
-      10,
+      neptuneCharacteristics.startPosition,
+      neptuneCharacteristics.revolutionSpeedRate,
+      neptuneCharacteristics.rotationSpeedRate,
+      neptuneCharacteristics.distanceFromAxis,
+      neptuneCharacteristics.rotationHeight,
     );
     neptune.setShadow();
-    neptune.setScale(500000 + 5000000);
-    neptune.setOrbit(500000 + 8800000, 150, 300, "indianred", Math.PI / 2);
+    neptune.setScale(neptuneCharacteristics.scale);
+    neptune.setOrbit(
+      neptuneCharacteristics.distanceFromAxis,
+      neptuneCharacteristics.orbit.thickness,
+      neptuneCharacteristics.orbit.segment,
+      neptuneCharacteristics.orbit.color,
+      neptuneCharacteristics.orbit.xAxis,
+    );
     neptune.addToScene();
 
     const pluto = new Planet(
       this.scene,
       this.modelStorage.plutoModel,
-      22,
-      0.007,
-      0.0001,
-      500000 + 10800000,
-      -50,
+      plutoCharacteristics.startPosition,
+      plutoCharacteristics.revolutionSpeedRate,
+      plutoCharacteristics.rotationSpeedRate,
+      plutoCharacteristics.distanceFromAxis,
+      plutoCharacteristics.rotationHeight,
     );
     pluto.setShadow();
-    pluto.setScale(500000 + 8000000);
-    pluto.setOrbit(500000 + 10800000, 150, 300, "indianred", Math.PI / 2 - 50);
+    pluto.setScale(plutoCharacteristics.scale);
+    pluto.setOrbit(
+      plutoCharacteristics.distanceFromAxis,
+      plutoCharacteristics.orbit.thickness,
+      plutoCharacteristics.orbit.segment,
+      plutoCharacteristics.orbit.color,
+      plutoCharacteristics.orbit.xAxis,
+    );
     pluto.addToScene();
 
     this.planets.push(sun);

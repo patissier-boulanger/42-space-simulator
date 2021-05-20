@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { autorun } from "mobx";
 
 import { counterStore } from "../store/counterStore";
 import { captionStore } from "../store/captionStore";
@@ -14,7 +13,7 @@ const canvas = document.querySelector("canvas.webgl");
 const loadingManager = new THREE.LoadingManager();
 
 loadingManager.onLoad = async () => {
-  await captionStore.showOpeningScript();
+  await captionStore.showOpeningCaption();
 
   introPage.classList.toggle("fadeOut");
   counter.classList.toggle("hidden");

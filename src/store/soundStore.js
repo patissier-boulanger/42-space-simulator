@@ -14,6 +14,7 @@ class SoundStore {
       spaceSound: observable,
       playSound: action,
       pauseSound: action,
+      lowerVolume: action,
     });
   }
 
@@ -31,7 +32,7 @@ class SoundStore {
   }
 
   lowerVolume(sound) {
-    sound.volume = sound.volume - 0.5;
+    sound.volume = sound.volume - 0.4;
   }
 }
 

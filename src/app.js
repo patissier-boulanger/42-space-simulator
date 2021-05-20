@@ -1,5 +1,6 @@
 import "./style.css";
 import * as THREE from "three";
+import * as CANNON from "cannon-es";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { DotScreenPass } from "three/examples/jsm/postprocessing/DotScreenPass.js";
@@ -25,7 +26,6 @@ class Simulator {
   }
 
   async _initialize() {
-    //basic setting
     this.canvas = document.querySelector("canvas.webgl");
     this.scene = new THREE.Scene();
     this.size = {
@@ -34,8 +34,8 @@ class Simulator {
     };
     this.clock = new THREE.Clock();
     this.previousTime = 0;
+    this.objectsToUpdate = [];
 
-    //load model
     const modelStorage = {};
     [
       modelStorage.starTexture,
@@ -60,13 +60,12 @@ class Simulator {
     ] = await loadAllModel();
     this.modelStorage = modelStorage;
 
-    //add state
     autorun(() => {
       counterStore.update(counterStore.count);
     });
 
     autorun(() => {
-      captionStore.showCounterScript(counterStore.count);
+      captionStore.showCounterCaption(counterStore.count);
     });
 
     autorun(() => {
@@ -75,62 +74,52 @@ class Simulator {
 
     autorun(() => {
       if (counterStore.count === 30) {
-        soundStore.lowerVolume(counterStore.count);
+        soundStore.lowerVolume(soundStore.breathingSound);
       }
 
       if (counterStore.count === 10) {
-        soundStore.lowerVolume(counterStore.count);
+        soundStore.lowerVolume(soundStore.breathingSound);
       }
     });
 
-    //play sound
     soundStore.playSound(soundStore.breathingSound, 1);
-    soundStore.playSound(soundStore.alarm1, 0.2);
-    soundStore.playSound(soundStore.alarm2, 0.2);
     soundStore.playSound(soundStore.spaceSound, 0.9);
 
-    //add light
     this._addLight();
 
-    //add camera
     this._addCamera();
 
-    //add renderer
     this._addRenderer();
 
-    //add post processing
+    this._addPhysics();
+
     this._addPostProcessor();
 
-    //add controller
     this.camera.position.set(1170624, 212379, 29717); // startpoint;
     this.controls = new PointLockWithY(
       this.camera,
       true,
-      2000,
+      4000,
       0.825,
       this.canvas,
+      this.scene,
     );
     this.scene.add(this.controls.camera);
     this.controls.addListner();
+    this.controls.addPhysicsPointer(this.world, this.defaultMaterial);
 
-    //add planets
-    //why? 객체 생성의 캡슐화
     this.solarSystem = new PlanetFactory(this.scene, this.modelStorage);
     this.solarSystem.realize();
 
-    //add Stars
     const stars = new Stars(this.scene, 1000, 12000000, 1000);
     stars.realize();
 
-    //add galaxy
     const galaxys = new GalaxyFactory(this.scene);
     galaxys.realize();
 
-    //add asteroid
     const asteroids = new AsteroidFactory(this.scene);
     asteroids.realize();
 
-    //add 3d object
     this.leftGlove = new Model(this.scene, this.modelStorage.leftGloveModel);
     this.leftGlove.realize();
     this.leftGlove.setShadow();
@@ -155,11 +144,9 @@ class Simulator {
     astronaut.setShadow();
     astronaut.setScale(40);
     astronaut.setPosition(1189000, 200000, 0);
+    astronaut.addPhysics(this.objectsToUpdate, this.world);
     astronaut.model.rotation.x = 1;
 
-    this.astronaut = astronaut;
-
-    //animate per 60fps
     this._tick();
 
     window.addEventListener(
@@ -209,6 +196,25 @@ class Simulator {
     this.scene.background = this.modelStorage.cubeMapModel;
   }
 
+  _addPhysics() {
+    const world = new CANNON.World();
+    world.broadphase = new CANNON.SAPBroadphase(world);
+    world.gravity.set(0, 0, 0);
+
+    const defaultMaterial = new CANNON.Material("default");
+    const defaultContactMaterial = new CANNON.ContactMaterial(
+      defaultMaterial,
+      defaultMaterial,
+      {
+        friction: 0.1,
+        restitution: 0,
+      },
+    );
+
+    this.world = world;
+    this.defaultMaterial = defaultMaterial;
+  }
+
   _addPostProcessor() {
     const effectComposer = new EffectComposer(this.renderer);
     effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -236,13 +242,11 @@ class Simulator {
 
     this.controls.update(deltaTime);
 
-    const result = this.controls.rayCaster.intersectObject(
-      this.astronaut.model,
-      true,
-    );
+    this.world.step(1 / 60, deltaTime, 3);
 
-    if (result.length) {
-      console.log(result);
+    for (const object of this.objectsToUpdate) {
+      object.model.position.copy(object.body.position);
+      object.model.quaternion.copy(object.body.quaternion);
     }
 
     this.solarSystem.planets.forEach((planet) => {
@@ -287,11 +291,9 @@ class Simulator {
     this.size.width = window.innerWidth;
     this.size.height = window.innerHeight;
 
-    // Update camera
     this.camera.aspect = this.size.width / this.size.height;
     this.camera.updateProjectionMatrix();
 
-    // Update renderer
     this.renderer.setSize(this.size.width, this.size.height);
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
@@ -299,7 +301,7 @@ class Simulator {
 
   _endSimulator(counter) {
     if (counter === 0) {
-      soundStore.pauseSound(soundStore.spaceSound);
+      soundStore.pauseSound(soundStore.breathingSound);
 
       cancelAnimationFrame(this.requestAnimationFrameId);
       const counter = document.querySelector(".counter");
@@ -311,7 +313,7 @@ class Simulator {
       caption.classList.toggle("hidden");
 
       introPage.classList.toggle("fadeOut");
-      captionStore.showEndingScript();
+      captionStore.showEndingCaption();
     }
   }
 

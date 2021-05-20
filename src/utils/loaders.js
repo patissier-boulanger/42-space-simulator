@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+
 import { loadingManager } from "../utils/loadingManger";
 
 const gltfLoader = new GLTFLoader(loadingManager);
@@ -41,14 +42,14 @@ const _promisyfyModels = () => {
 
   const gltfUrls = [
     "/textures/planets/sun.gltf",
-    "/textures/planets/mercury2.gltf",
-    "/textures/planets/venus2.gltf",
-    "/textures/planets/earth2.gltf",
-    "/textures/planets/mars2.gltf",
+    "/textures/planets/mercury.gltf",
+    "/textures/planets/venus.gltf",
+    "/textures/planets/earth.gltf",
+    "/textures/planets/mars.gltf",
     "/textures/planets/jupiter.gltf",
-    "/textures/planets/saturn2.gltf",
-    "/textures/planets/uranus2.gltf",
-    "/textures/planets/neptune2.gltf",
+    "/textures/planets/saturn.gltf",
+    "/textures/planets/uranus.gltf",
+    "/textures/planets/neptune.gltf",
     "/textures/planets/pluto.gltf",
     "/textures/objects/cloud/cloud.gltf",
     "/textures/gloves/leftGlove/scene.gltf",
@@ -71,7 +72,6 @@ const _promisyfyModels = () => {
 };
 
 const loadAllModel = () => {
-  console.log("started");
   return Promise.all(_promisyfyModels());
 };
 

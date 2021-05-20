@@ -1,4 +1,5 @@
 import * as THREE from "three";
+
 import { Object } from "./object";
 
 class Model extends Object {
