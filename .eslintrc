@@ -6,8 +6,11 @@
     "sourceType": "module"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
+
+  "ignorePatterns": "/bundler",
   "rules": {
     "prettier/prettier": "error"
   }
