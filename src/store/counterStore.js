@@ -5,6 +5,7 @@ const counter = document.querySelector(".counter");
 class CounterStore {
   constructor() {
     this.count = 42;
+
     makeObservable(this, {
       count: observable,
       decrease: action,

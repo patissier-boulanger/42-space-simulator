@@ -82,8 +82,8 @@ class Simulator {
       }
     });
 
-    soundStore.playSound(soundStore.breathingSound, 1.3);
-    soundStore.playSound(soundStore.spaceSound, 0.9);
+    soundStore.playSound(soundStore.breathingSound, 1);
+    soundStore.playSound(soundStore.spaceSound, 0.7);
 
     this._addLight();
 
@@ -100,7 +100,7 @@ class Simulator {
     this.controls = new PointLockWithY(
       this.camera,
       true,
-      40000,
+      2000,
       0.825,
       this.canvas,
       this.scene,

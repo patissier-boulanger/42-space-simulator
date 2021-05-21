@@ -13,6 +13,7 @@ const introPageText = document.querySelector(".intro-text");
 class CaptionStore {
   constructor() {
     this.currentCaption = emptyLine;
+
     makeObservable(this, {
       currentCaption: observable,
       showOpeningCaption: action,
@@ -26,11 +27,15 @@ class CaptionStore {
 
   async showOpeningCaption() {
     await this.pause(3000);
+    introPageText.innerHTML = introCaptions.line0;
+    await this.pause(3000);
     introPageText.innerHTML = introCaptions.line1;
     await this.pause(3000);
     introPageText.innerHTML = introCaptions.line2;
     await this.pause(3000);
     introPageText.innerHTML = introCaptions.line3;
+    await this.pause(3000);
+    introPageText.innerHTML = introCaptions.line4;
     await this.pause(3000);
     introPageText.innerHTML = emptyLine;
   }

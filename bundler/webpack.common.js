@@ -20,7 +20,6 @@ module.exports = {
       minify: true,
     }),
     new MiniCSSExtractPlugin(),
-    new FontPreloadPlugin(),
   ],
   module: {
     rules: [
