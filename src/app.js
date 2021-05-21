@@ -100,7 +100,7 @@ class Simulator {
     this.controls = new PointLockWithY(
       this.camera,
       true,
-      2000,
+      3000,
       0.825,
       this.canvas,
       this.scene,
@@ -112,7 +112,7 @@ class Simulator {
     this.solarSystem = new PlanetFactory(this.scene, this.modelStorage);
     this.solarSystem.realize();
 
-    const stars = new Stars(this.scene, 5000, 4800000, 2000);
+    const stars = new Stars(this.scene, 7000, 7000000, 1500);
     stars.realize();
 
     const galaxys = new GalaxyFactory(this.scene);

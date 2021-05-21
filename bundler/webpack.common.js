@@ -1,7 +1,6 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
-const FontPreloadPlugin = require("webpack-font-preload-plugin");
 const path = require("path");
 
 module.exports = {
