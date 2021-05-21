@@ -82,7 +82,7 @@ class Simulator {
       }
     });
 
-    soundStore.playSound(soundStore.breathingSound, 1);
+    soundStore.playSound(soundStore.breathingSound, 1.3);
     soundStore.playSound(soundStore.spaceSound, 0.9);
 
     this._addLight();
@@ -96,10 +96,11 @@ class Simulator {
     this._addPostProcessor();
 
     this.camera.position.set(1170624, 212379, 29717); // startpoint;
+
     this.controls = new PointLockWithY(
       this.camera,
       true,
-      4000,
+      40000,
       0.825,
       this.canvas,
       this.scene,
@@ -111,7 +112,7 @@ class Simulator {
     this.solarSystem = new PlanetFactory(this.scene, this.modelStorage);
     this.solarSystem.realize();
 
-    const stars = new Stars(this.scene, 1000, 12000000, 1000);
+    const stars = new Stars(this.scene, 5000, 4800000, 2000);
     stars.realize();
 
     const galaxys = new GalaxyFactory(this.scene);
