@@ -106,7 +106,7 @@ class PointLockWithY {
         break;
 
       case 82:
-        this.moveUp = true;
+        this.movementSpeed = 80000;
         break;
       case 70:
         this.moveDown = true;
@@ -141,7 +141,7 @@ class PointLockWithY {
         break;
 
       case 82:
-        this.moveUp = false;
+        this.movementSpeed = 3000;
         break;
       case 70:
         this.moveDown = false;
