@@ -1,7 +1,10 @@
 const introCaptions = {};
+
+introCaptions.line0 = "20XX/05/1X";
 introCaptions.line1 = "I am pretty much fucked";
 introCaptions.line2 = "Left alone in the space";
-introCaptions.line3 = "Time left... 42 minute";
+introCaptions.line3 = "Time left...";
+introCaptions.line4 = "42 minute";
 
 const endingLine = "42 space simulator";
 

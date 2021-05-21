@@ -26,8 +26,11 @@ loadingManager.onLoad = async () => {
 };
 
 loadingManager.onProgress = async function (url, itemsLoaded, itemsTotal) {
-  console.log(`Items loaded: ${itemsLoaded}/${itemsTotal}`);
-  introPageText.innerHTML = "20XX/05/17";
+  if (itemsLoaded / itemsTotal === 1) {
+    return;
+  } else {
+    introPageText.innerHTML = `${Math.floor((itemsLoaded / itemsTotal) * 100)}`;
+  }
 };
 
 loadingManager.onError = function (url) {
