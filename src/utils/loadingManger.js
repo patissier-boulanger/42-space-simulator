@@ -27,6 +27,7 @@ loadingManager.onLoad = async () => {
 
 loadingManager.onProgress = async function (url, itemsLoaded, itemsTotal) {
   if (itemsLoaded / itemsTotal === 1) {
+    return;
   } else {
     introPageText.innerHTML = `${Math.floor((itemsLoaded / itemsTotal) * 100)}`;
   }
