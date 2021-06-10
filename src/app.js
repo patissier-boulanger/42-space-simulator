@@ -95,7 +95,7 @@ class Simulator {
 
     this._addPostProcessor();
 
-    this.camera.position.set(1170624, 212379, 29717); // startpoint;
+    this.camera.position.set(1170624, 212379, 29717);
 
     this.controls = new PointLockWithY(
       this.camera,
@@ -203,14 +203,6 @@ class Simulator {
     world.gravity.set(0, 0, 0);
 
     const defaultMaterial = new CANNON.Material("default");
-    const defaultContactMaterial = new CANNON.ContactMaterial(
-      defaultMaterial,
-      defaultMaterial,
-      {
-        friction: 0.1,
-        restitution: 0,
-      },
-    );
 
     this.world = world;
     this.defaultMaterial = defaultMaterial;
@@ -255,9 +247,6 @@ class Simulator {
       planet.rotate();
     });
 
-    /**
-     * Attach gloves to screen
-     */
     this.leftGlove.model.position.copy(this.camera.position);
     this.leftGlove.model.rotation.set(
       this.camera.rotation.x,

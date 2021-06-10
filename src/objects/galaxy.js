@@ -37,7 +37,7 @@ class Galaxy extends Object {
       blending: THREE.AdditiveBlending,
       vertexColors: true,
     });
-    const positions = new Float32Array(this.count * 3); // each vertex have 3 value for x y z
+    const positions = new Float32Array(this.count * 3);
     const colors = new Float32Array(this.count * 3);
     const colorInside = new THREE.Color(this.insideColor);
     const colorOutside = new THREE.Color(this.ousideColor);
@@ -45,9 +45,9 @@ class Galaxy extends Object {
     for (let i = 0; i < this.count; i++) {
       const i3 = i * 3;
 
-      const radius = Math.random() * this.radius; //x radius 0 to 5
+      const radius = Math.random() * this.radius;
       const spinAngle = radius * this.spin;
-      const branchAngle = ((i % this.branches) / this.branches) * Math.PI * 2; // 왜 / this.branches 하나면 정규화하기 위해
+      const branchAngle = ((i % this.branches) / this.branches) * Math.PI * 2;
       const randomX =
         Math.pow(Math.random(), this.randomnessPower) *
         (Math.random() < 0.5 ? 1 : -1) *
@@ -64,25 +64,24 @@ class Galaxy extends Object {
         this.randomness *
         radius;
 
-      positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX; // x
-      positions[i3 + 1] = 0 + randomY; // y
-      positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ; // z
+      positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+      positions[i3 + 1] = 0 + randomY;
+      positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
 
       const mixedColor = colorInside.clone();
-      mixedColor.lerp(colorOutside, radius / 5); //this.radius
+      mixedColor.lerp(colorOutside, radius / 5);
 
       colors[i3] = mixedColor.r;
       colors[i3 + 1] = mixedColor.g;
       colors[i3 + 2] = mixedColor.b;
     }
 
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3)); //3은 how many value per vertex
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const particles = new THREE.Points(geometry, material);
 
     this.model = particles;
-    // this.scene.add(particles);
   }
 }
 
@@ -121,7 +120,7 @@ const createGalaxy = (
         blending: THREE.AdditiveBlending,
         vertexColors: true,
       });
-      const positions = new Float32Array(this.count * 3); // each vertex have 3 value for x y z
+      const positions = new Float32Array(this.count * 3);
       const colors = new Float32Array(this.count * 3);
       const colorInside = new THREE.Color(this.insideColor);
       const colorOutside = new THREE.Color(this.ousideColor);
@@ -129,9 +128,9 @@ const createGalaxy = (
       for (let i = 0; i < this.count; i++) {
         const i3 = i * 3;
 
-        const radius = Math.random() * this.radius; //x radius 0 to 5
+        const radius = Math.random() * this.radius;
         const spinAngle = radius * this.spin;
-        const branchAngle = ((i % this.branches) / this.branches) * Math.PI * 2; // 왜 / this.branches 하나면 정규화하기 위해
+        const branchAngle = ((i % this.branches) / this.branches) * Math.PI * 2;
         const randomX =
           Math.pow(Math.random(), this.randomnessPower) *
           (Math.random() < 0.5 ? 1 : -1) *
@@ -148,13 +147,13 @@ const createGalaxy = (
           this.randomness *
           radius;
 
-        positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX; // x
-        positions[i3 + 1] = 0 + randomY; // y
+        positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+        positions[i3 + 1] = 0 + randomY;
         positions[i3 + 2] =
-          Math.sin(branchAngle + spinAngle) * radius + randomZ; // z
+          Math.sin(branchAngle + spinAngle) * radius + randomZ;
 
         const mixedColor = colorInside.clone();
-        mixedColor.lerp(colorOutside, radius / 5); //this.radius
+        mixedColor.lerp(colorOutside, radius / 5);
 
         colors[i3] = mixedColor.r;
         colors[i3 + 1] = mixedColor.g;
@@ -164,7 +163,7 @@ const createGalaxy = (
       geometry.setAttribute(
         "position",
         new THREE.BufferAttribute(positions, 3),
-      ); //3은 how many value per vertex
+      );
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const particles = new THREE.Points(geometry, material);
