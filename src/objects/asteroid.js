@@ -15,8 +15,8 @@ const createAsteroid = (
   maxScale,
 ) => {
   for (let i = 0; i < count; i++) {
-    const x = generateRandomNumber(minX, maxX); // Get the x position using cosinus
-    const z = generateRandomNumber(minY, maxY); // Get the z position using sinus
+    const x = generateRandomNumber(minX, maxX);
+    const z = generateRandomNumber(minY, maxY);
     const y = generateRandomNumber(minZ, maxZ);
 
     const asteroidGeometry = new THREE.DodecahedronGeometry(2, 0);

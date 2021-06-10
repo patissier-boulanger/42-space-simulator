@@ -55,7 +55,7 @@ class PointLockWithY {
     }
 
     this.lon += 20 * this.movementX * actualLookSpeed;
-    this.lat -= 20 * this.movementY * actualLookSpeed; // * verticalLookRatio;
+    this.lat -= 20 * this.movementY * actualLookSpeed;
     this.movementX = 0;
     this.movementY = 0;
 
