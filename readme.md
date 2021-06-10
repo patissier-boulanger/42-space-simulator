@@ -4,6 +4,11 @@
 
 ## 1. About
 
+<p align="center">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/exemple.png" width="70%" height="70%">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/exemple2.png" width="70%" height="70%">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/exemple3.png" width="70%" height="70%">
+</p>
 
 [http://42simulator.space/](http://42simulator.space/)
 
@@ -24,6 +29,11 @@
 
 ## 1. 기획 의도
 
+<p align="center">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/gravity.jpg" width="70%" height="40%">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/obraDinn.jpg" width="70%" height="70%">
+</p>
+
 42는 영화 그래비티와 게임 오브라딘 호의 귀환을 보고 영감을 받아서 만들게 되었습니다. 우주라는 공간은 여러 매체에서 다양한 모습으로 그려집니다. 가끔은 탐험의 대상이기도 하고, 가끔은 낭만적인 공간이기도 합니다. 그러나 저는 42에서 우주를 고독함과 무력함을 느낄 수 있는 완전히 분리된 공간으로 그리고 싶었습니다. 
 
 이러한 공간의 느낌을 전달하기 위해 다양한 방법을 생각해 보았습니다. 여기서 게임 오브라딘 호의 귀환의 셰이더 효과를 떠올렸습니다. 강렬한 흑백 대비와 아웃 라인의 강조가 제가 그리고 싶은 우주의 모습과 잘 어울린다고 생각해서 이와 같은 효과를 사용한 시뮬레이터를 만들기로 결정하였습니다. 
@@ -36,6 +46,10 @@
 5/3/2021 ~ 5/21/2021
 
 ## 3. 진행
+
+<p align="center">
+<img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/moodboard.PNG" width="70%" height="70%">
+</p>
 
 먼저 기본적인 앱의 플로우와 이에 따라 어떤 기술 스택을 사용해야 하는지 생각해보았습니다. 후에 `figma` 를 사용해서 간단한 목업을 제작하였습니다. 우주에 관련된 이미지와 실제로 상용화 되어 있는 게임들의 이미지를 참조하여 무드보드를 만들었습니다. 
 
