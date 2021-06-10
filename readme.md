@@ -1,6 +1,27 @@
-# Readme
+# 42 space simulator
+- [ABOUT](#about)
+  * [1. About](#1-about)
+  * [2. Features](#2-features)
+- [Before get started](#before-get-started)
+  * [1. Planning](#1-planning)
+  * [2. Periods of Development](#2-periods-of-development)
+  * [3. Concept](#3-concept)
+- [How to install](#how-to-install)
+- [Stack](#stack)
+  * [Frontend](#frontend)
+  * [Why use](#why-use)
+    + [ThreeJS](#threejs)
+    + [Javascript and Webpack](#javascript-and-webpack)
+    + [Flux pattern and Mobx](#flux-pattern-and-mobx)
+- [What I have Learned](#what-i-have-learned)
+  * [Think before code](#think-before-code)
+    + [Class vs Factory function](#class-vs-factory-function)
+    + [Variable name and readability](#variable-name-and-readability)
+    + [Applying design pattern - factory pattern](#applying-design-pattern---factory-pattern)
+  * [Knowing dose not equal Doing](#knowing-dose-not-equal-doing)
+- [Summary](#summary)
 
-# ABOUT
+
 
 ## 1. About
 
@@ -31,7 +52,7 @@ https://www.youtube.com/watch?v=mvFBfis8bU0
 # Before get started
 
 
-## 1. 기획 의도
+## 1. Planning
 
 <p align="center">
 <img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/gravity.jpg" width="70%" height="40%">
@@ -45,11 +66,11 @@ https://www.youtube.com/watch?v=mvFBfis8bU0
 여기에 단순히 우주를 유영하는 것만으로는 유저에게 몰입감을 주기 힘들다고 생각하여 약간의 내러티브를 적용하였습니다. 간단한 인트로와 아웃트로, 그리고 42초가 지나면 시뮬레이터가 종료된다는 스토리라인을 적용하였습니다.
 <br>
 
-## 2. 개발 기간
+## 2. Periods of Development
 
 5/3/2021 ~ 5/21/2021
 
-## 3. 진행
+## 3. Concept 
 
 <p align="center">
 <img src="https://github.com/patissier-boulanger/42-space-simulator/blob/readme/static/images/moodboard.PNG" width="70%" height="70%">
@@ -86,9 +107,9 @@ Javascript, ThreeJS, Mobx, Webpack,
 
 <br>
 
-## Why use?
+## Why use
 
-### *ThreeJS*
+### ThreeJS
 
 - 3d 그래픽을 브라우저에서 표현하기 위해서는 기본적으로 자바스크립트 라이브러리인 `webGL` 을 사용합니다. `webGl` 만 가지고 구현하는 것도 가능하지만, 러닝 커브가 높아서 3주의 시간으로는 원하는 만큼의 퀄리티를 구현하기 힘들다고 판단해서 `webGL` 을 사용한 라이브러리를 사용하고자 하였습니다.
 - 대표적인 두 가지 라이브러리 `ThreeJS` 와 `Babylon.js` 사이에서 고민을 하였습니다.  `ThreeJS` 는 브라우저 안에서 애니메이션적인 요소로 사용하는 등 브라우저와 같이 좀 더 범용적인 요소로 사용할 수 있다면  `Babylon.js` 는 충돌 계산과 같이 웹 게임에 더 유리하다는 점이 있었습니다.
@@ -96,7 +117,7 @@ Javascript, ThreeJS, Mobx, Webpack,
 
 <br>
 
-### *Javascript + Webpack*
+### Javascript and Webpack
 
 - 의존성 관리와 전역 스코프 관리, 코드 분할을 위해서 번들러를 사용하였습니다.
 - `React` 와 함께  `Create-React-App` 을 사용했다면 초기 개발 속도가 빨라질 수 있었지만, 하나의 캔버스 element 위에서 렌더링이 이루어지므로 재사용 가능한 컴포넌트, 가상 dom을 통한 빠른 렌더링과 같은 `React`의 장점을 살릴 수 없다고 생각해서 `Javascript`를 사용하였습니다.
@@ -105,7 +126,7 @@ Javascript, ThreeJS, Mobx, Webpack,
 
 <br>
 
-### Flux pattern + Mobx
+### Flux pattern and Mobx
 
 - 기획 단계에서 여러가지 상태를 관리할 필요성을 느끼고 Flux pattern을 사용하였습니다. MVC pattern을 사용하여 유저가 w 버튼을 누르면 컨트롤러가 모델을 앞으로 이동시키고, 그 상태를 다시 뷰가 렌더링하고 하는 방식으로 하는 것 보다, 단순히 상태를 캐치하여 뷰를 업데이트 하는 것이 더 간단하다고 생각하였습니다.
 - 프로젝트를 객체지향적으로 설계하였는데 `Redux`의 경우 상태를 바꾸는게 아니라 불변성을 유지하기 위해 새로운 상태로 계속 덮어 써야 하는 특징을 가지고 있어 함수형 프로그래밍에 더 적합하다고 생각하였습니다.
@@ -113,9 +134,9 @@ Javascript, ThreeJS, Mobx, Webpack,
 
 <br>
 
-# What I've Learned
+# What I have Learned
 
-## 생각하고 치기
+## Think before code
 
 프로젝트를 진행하면서 어떤 선택을 내리기 전에 항상 장단점을 조사하려고 노력하였습니다. 스택을 결정하는 것부터 시작해서 설계 구조, 어떤 패턴을 선택해야 하는지, class를 써야 하는지 factory function을 써야 하는 지까지 항상 코드를 치기 전에 생각해야 한다고 느꼈습니다. 
 
@@ -159,7 +180,7 @@ planet.revolution(); // planet.revolution is not a function
 
 <br>
 
-### 변수명과 가독성
+### Variable name and readability
 
 가독성 있는 변수명이 얼마나 기본적이고 중요한지 프로젝트를 진행하면서 느낄 수 있었습니다. 프로젝트 초반 `ThreeJS` 학습을 위해서 다른 사람들의 코드를 볼 일이 매우 많았습니다. 이 중에서 읽는데 불편함을 느꼈던 코드들이 있었습니다. 예를 들면 벡터의 위치를 계산하는 아래와 같은 코드가 있었습니다. 
 
@@ -179,9 +200,9 @@ for (let i = 0, l = position.count; i < l; i++) {
 
 <br>
 
-### 디자인 패턴 - factory pattern
+### Applying design pattern - factory pattern
 
-머리로는 디자인 패턴을 안다고 생각했는데 실제로 이를 적용하는 것에 아쉬운 점을 많이 느꼈습니다. 실제 코드의 class `PlanetFactory` 를 보면 이렇게 단순히 더 작은 단위의 `planet` 인스턴스의 실행문을 엮어 놓았을 뿐 진짜 팩토리 패턴을 적용했다고 보긴 어렵다고 생각했습니다.
+머리로는 디자인 패턴을 안다고 생각했는데 실제로 이를 적용하는 것에 아쉬운 점을 많이 느꼈습니다. 실제 코드의 class PlanetFactory 를 보면 이렇게 단순히 더 작은 단위의 Planet의 인스턴스의 실행문을 엮어 놓았을 뿐 진짜 팩토리 패턴을 적용했다고 보긴 어렵다고 생각했습니다.
 
 ```jsx
 class PlanetFactory {
@@ -226,7 +247,7 @@ function planetFactory() {
 
 <br>
 
-## 아는 것과 보는 것은 다르다. 하는 것은 더 다르다.
+## Knowing dose not equal Doing
 
 프로젝트를 진행하면서 여러가지 기술적 어려움을 겪었습니다. 3차원에서의 좌표 계산과 같은 수학에 관련한 어려움도 겪었고, 광원이 없어서 사물이 보이지 않는다던지 하는 기술적인 문제도 많았습니다. 특히 모델에 관한 부분은 결국 3d 툴인 `blender` 를 사용해서 문제를 해결해야 하는 경우도 있었습니다. 그러나 이러한 문제들은 `ThreeJS` 라이브러리를 사용하는데 익숙해지면서 자연스럽게 해결이 가능했습니다.
 
